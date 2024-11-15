@@ -9,6 +9,13 @@ namespace Web.Controllers
     {
        private Sistema miSistema = Sistema.Instancia;
 
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        Sistema miSistema = new Sistema();
+
         public IActionResult Index()
         {
             return View();

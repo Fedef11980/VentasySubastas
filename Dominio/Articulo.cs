@@ -57,6 +57,7 @@ namespace Dominio
             return $"Categoría: {_categoria} - Nombre: {_nombre} - Precio: ${_precio}";
         }
 
+
         public override bool Equals(object obj)
         {
             Articulo articulos = obj as Articulo;
