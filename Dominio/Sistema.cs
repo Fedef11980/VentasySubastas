@@ -8,11 +8,12 @@ namespace Dominio
 {
     public class Sistema
     {
+        private static Sistema s_instancia;
         private List<Articulo> _articulos = new List<Articulo>();
         private List<Usuario> _usuarios = new List<Usuario>();
         private List<Publicacion> _publicaciones = new List<Publicacion>();
 
-       public Sistema() 
+       private Sistema()  
         {
             PrecargarArticulos();
             PrecargarPublicaciones();
@@ -20,7 +21,18 @@ namespace Dominio
             PreCargarOfertas();
         }
 
-//#Sinbgleton
+        //Singleton
+        public static Sistema Instancia 
+        {
+            get 
+            {
+                if (s_instancia == null) s_instancia = new Sistema();
+                return s_instancia;
+            }    
+        } 
+
+       
+
         public Articulo ObtenerCategoria(string categoria) // buscar articulos
         {
             Articulo buscada = null;

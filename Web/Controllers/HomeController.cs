@@ -7,7 +7,7 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        Sistema miSistema= new Sistema();
+       private Sistema miSistema = Sistema.Instancia;
 
         public IActionResult Index()
         {

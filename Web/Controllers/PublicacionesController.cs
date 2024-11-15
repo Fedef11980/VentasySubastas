@@ -5,7 +5,7 @@ namespace Web.Controllers
 {
     public class PublicacionesController : Controller
     {
-        Sistema miSistema = new Sistema();  
+        private Sistema miSistema = Sistema.Instancia; 
 
         public IActionResult Index()
         {

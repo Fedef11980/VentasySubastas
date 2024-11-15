@@ -11,13 +11,14 @@ namespace Dominio
     public class Articulo : IValidable
     {
         private int _id;
-        private static int ultId = 1;
+        private static int _ultId = 1;
         private string _nombre;
         private string _categoria;
         private double _precio;
 
         public Articulo( string nombre, string categoria, double precio)
         {
+            _id = _ultId++;
             _nombre = nombre;
             _categoria = categoria;
             _precio = precio;
@@ -28,6 +29,7 @@ namespace Dominio
         {
             get { return _id; }
         }
+
         public string Nombre
         {
             get { return _nombre; }
@@ -54,9 +56,6 @@ namespace Dominio
         {
             return $"Categoría: {_categoria} - Nombre: {_nombre} - Precio: ${_precio}";
         }
-
-    
-
 
         public override bool Equals(object obj)
         {

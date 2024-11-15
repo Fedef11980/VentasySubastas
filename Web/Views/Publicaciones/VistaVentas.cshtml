@@ -3,16 +3,14 @@
     ViewData["Title"] = "VistaVentas";
 }
 
-<h1>VistaVentas</h1>
-
 <h1 class="text-center">Ventas</h1>
 
 <br />
 <br />
 
-@if (ViewBag.ListadoArticulosVenta == null || ViewBag.ListadoArticulosVenta == 0)
+@if (ViewBag.ListadoArticulosVenta == null || ViewBag.ListadoArticulosVenta.Count == 0)
 {
-    <div><p class="alert alert-danger">No hay articulos en el sistema</p></div>
+    <div class="alert alert-danger"><p>No hay articulos en el sistema</p></div>
 }
 else
 {
@@ -26,16 +24,15 @@ else
             </tr>
         </thead>
         <tbody>
-            <tr>
-                @foreach (Articulo a in ViewBag.ListadoArticulosVenta)
-                {
-                    <th>@a.Id</th>
-                    <th>@a.Nombre</th>
-                    <th>@a.Categoria</th>
-                    <th>@a.Precio</th>
-                }
-            </tr>
+            @foreach (Articulo a in ViewBag.ListadoArticulosVenta)
+            {
+                <tr>
+                    <td>@a.Id</td>
+                    <td>@a.Nombre</td>
+                    <td>@a.Categoria</td>
+                    <td>@a.Precio</td>
+                </tr>
+            }            
         </tbody>
-
     </table>
 }
