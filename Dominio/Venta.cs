@@ -16,6 +16,15 @@ namespace Dominio
             _ofertaRelampago = ofertaRelampago;
         }
 
-
+        public override double CalcularPrecio()
+        {
+            double precio = 0;
+            foreach (Articulo a in _articulos )
+            {
+                 precio += a.Precio; 
+            }
+            if (_ofertaRelampago) precio *= 0.8;
+            return precio;
+        }
     }
 }

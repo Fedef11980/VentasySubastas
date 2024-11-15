@@ -1,14 +1,14 @@
 ﻿@using Dominio;
 @{
-    ViewData["Title"] = "VistaVentas";
+    ViewData["Title"] = "ListarPublicaciones";
 }
 
-<h1 class="text-center">Ventas</h1>
+<h1 class="text-center">Publicaciones</h1>
 
 <br />
 <br />
 
-@if (ViewBag.ListadoArticulosVenta == null || ViewBag.ListadoArticulosVenta.Count == 0)
+@if (ViewBag.ListadoPublicaciones == null || ViewBag.ListadoPublicaciones.Count == 0)
 {
     <div class="alert alert-danger"><p>No hay articulos en el sistema</p></div>
 }
@@ -24,15 +24,15 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (Articulo a in ViewBag.ListadoArticulosVenta)
+            @foreach (Publicacion p in ViewBag.ListadoPublicaciones)
             {
                 <tr>
-                    <td>@a.Id</td>
-                    <td>@a.Nombre</td>
-                    <td>@a.Categoria</td>
-                    <td>@a.Precio</td>
+                    <td>@p.Id</td>
+                    <td>@p.Nombre</td>
+                    <td>@p.Estado</td>
+                    <td>@p.CalcularPrecio()</td>
                 </tr>
-            }            
+            }
         </tbody>
     </table>
 }

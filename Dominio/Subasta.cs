@@ -38,7 +38,13 @@ namespace Dominio
             _ofertas.Add(oferta);
         }
 
-        
+        public override double CalcularPrecio()
+        {
+            if (_ofertas == null || _ofertas.Count == 0) return 0;
+            return _ofertas.Max(o => o.Monto);
+        }
+
+
 
 
 

@@ -27,24 +27,14 @@ namespace Dominio
             _estado = estado;
         }
 
-        public string Estado
+        public int Id
         {
-            get { return _estado.ToString(); }
+            get { return _id; }
         }
 
         public string Nombre
         {
             get { return _nombre; }
-        }
-
-        public List<Articulo> Articulos
-        { 
-            get { return _articulos; } 
-        }
-
-        public int Id
-        {
-            get { return _id; }
         }
 
         public DateTime FechaPublic
@@ -55,6 +45,16 @@ namespace Dominio
         public DateTime FechaFinaliz
         {
             get { return _fechaFinaliz; }
+        }
+
+        public string Estado
+        {
+            get { return _estado.ToString(); }
+        }       
+
+        public List<Articulo> Articulos
+        { 
+            get { return _articulos; } 
         }
         
         public virtual void Validar()
@@ -74,7 +74,6 @@ namespace Dominio
             return publicacion != null && this._id == publicacion._id;
         }
 
-
         // Método para agregar artículos a la publicación
         public void AgregarArticulo(Articulo articulo)
         {
@@ -88,6 +87,8 @@ namespace Dominio
                  throw new Exception("El artículo ya está asociado a esta publicación");
             }
         }
+
+        public abstract double CalcularPrecio();
 
       
 

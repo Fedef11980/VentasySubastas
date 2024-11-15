@@ -19,6 +19,7 @@ namespace Dominio
             PrecargarPublicaciones();
             PrecargarUsuarios();
             PreCargarOfertas();
+            PrecargarArticulosPublicaciones();
         }
 
         //Singleton
@@ -29,9 +30,7 @@ namespace Dominio
                 if (s_instancia == null) s_instancia = new Sistema();
                 return s_instancia;
             }    
-        } 
-
-       
+        }        
 
         public Articulo ObtenerCategoria(string categoria) // buscar articulos
         {
@@ -49,6 +48,11 @@ namespace Dominio
         public List<Articulo> Articulos
         {
             get { return _articulos; }
+        }
+
+        public List<Publicacion> Publicaciones
+        {
+            get { return _publicaciones; }
         }
 
         private void PrecargarArticulos()
@@ -164,7 +168,7 @@ namespace Dominio
             AsignarArticuloAPublicacion(10, 50); // Pelota de playa
 
             // Precarga de Ventas
-            AsignarArticuloAPublicacion(1, 37); // Consola de videojuegos
+            AsignarArticuloAPublicacion(1, 11); // Consola de videojuegos
             AsignarArticuloAPublicacion(1, 19); // Videojuego
             AsignarArticuloAPublicacion(2, 14); // Lámpara de pie
             AsignarArticuloAPublicacion(2, 42); // Cortinas
@@ -224,7 +228,7 @@ namespace Dominio
             _articulos.Add(articulo);
         }
 
-        public void AltaPublicacion(Publicacion publicacion)
+        public void AltaPublicacion( Publicacion publicacion)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         {
             if(publicacion == null) throw new Exception ("La publicación no puede ser nula");
             publicacion.Validar();
@@ -264,7 +268,7 @@ namespace Dominio
             Articulo articuloBuscado = AsignarArticulo(idArticulo);
             if (articuloBuscado == null) throw new Exception("El artículo no fue encontrado o no es válido."); // Buscar el artículo y validar
           
-            publicacionBuscada.AgregarArticulo(articuloBuscado);  // Asignar el artículo a la publicación
+            publicacionBuscada.AgregarArticulo(articuloBuscado);// Asignar el artículo a la publicación
         }
 
         public void AltaUsuario(Usuario usuario)
