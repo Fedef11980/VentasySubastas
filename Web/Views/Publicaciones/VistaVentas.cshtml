@@ -1,0 +1,41 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "VistaVentas";
+}
+
+<h1>VistaVentas</h1>
+
+<h1 class="text-center">Ventas</h1>
+
+<br />
+<br />
+
+@if (ViewBag.ListadoArticulosVenta == null || ViewBag.ListadoArticulosVenta == 0)
+{
+    <div><p class="alert alert-danger">No hay articulos en el sistema</p></div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (Articulo a in ViewBag.ListadoArticulosVenta)
+                {
+                    <th>@a.Id</th>
+                    <th>@a.Nombre</th>
+                    <th>@a.Categoria</th>
+                    <th>@a.Precio</th>
+                }
+            </tr>
+        </tbody>
+
+    </table>
+}

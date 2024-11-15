@@ -12,7 +12,7 @@ namespace Dominio
         private List<Usuario> _usuarios = new List<Usuario>();
         private List<Publicacion> _publicaciones = new List<Publicacion>();
 
-        public Sistema() 
+       public Sistema() 
         {
             PrecargarArticulos();
             PrecargarPublicaciones();
@@ -20,6 +20,7 @@ namespace Dominio
             PreCargarOfertas();
         }
 
+//#Sinbgleton
         public Articulo ObtenerCategoria(string categoria) // buscar articulos
         {
             Articulo buscada = null;
@@ -31,6 +32,11 @@ namespace Dominio
                 i++;
             }
             return buscada;
+        }
+
+        public List<Articulo> Articulos
+        {
+            get { return _articulos; }
         }
 
         private void PrecargarArticulos()
@@ -270,12 +276,12 @@ namespace Dominio
 
         public List<Articulo> ListarArticulosPorCategoria(string categoriaBuscada)
         {
-            string categoriaBuscadaLower = categoriaBuscada.ToLower();// Convertir la categoría buscada a minúsculas
+            string categoriaBuscadaLower = categoriaBuscada.ToLower(); // Convertir la categoría buscada a minúsculas
 
             List<Articulo> articulosFiltrados = new List<Articulo>();
             foreach (Articulo art in _articulos)
             {
-               if (art.Categoria.ToLower() == categoriaBuscadaLower) articulosFiltrados.Add(art);// Convertir las categorías almacenadas a minúsculas para la comparación
+               if (art.Categoria.ToLower() == categoriaBuscadaLower) articulosFiltrados.Add(art); // Convertir las categorías almacenadas a minúsculas para la comparación
             }
             return articulosFiltrados;
         }
@@ -328,10 +334,8 @@ namespace Dominio
         {
             Cliente clientebuscado = ObtenerUsuarioPorId(idCliente);
             Subasta subastaBuscada = ObternerSubastaPorId(idSubasta);
-            if (clientebuscado == null) throw new Exception("El id de ususario no existe");
-            if (subastaBuscada == null) throw new Exception("El id de subasta no existe");
-            //if (monto <= 0) throw new Exception("El monto tiene que ser mayor que cero");
-            //if (fecha.Year > 2020) throw new Exception("La fecha tiene que ser posterior a 2020");
+            if (clientebuscado == null) throw new Exception ("El id del ususario no existe");
+            if (subastaBuscada == null) throw new Exception ("El id de la subasta no existe");
             Oferta ofertas = new Oferta(clientebuscado, monto, fecha);
             subastaBuscada.AgregarOferta(ofertas);
         }       

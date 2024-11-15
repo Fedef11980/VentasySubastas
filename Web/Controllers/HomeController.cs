@@ -1,3 +1,4 @@
+using Dominio;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Web.Models;
@@ -6,33 +7,11 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        Sistema miSistema= new Sistema();
 
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult VistaVentas()
-        {
-            return View();
-        }
-
-        public IActionResult VistaSubastas() 
-        { 
-            return View(); 
-        }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        }                        
     }
 }

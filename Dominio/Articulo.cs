@@ -23,6 +23,26 @@ namespace Dominio
             _precio = precio;
         }
 
+        //Getters
+        public int Id
+        {
+            get { return _id; }
+        }
+        public string Nombre
+        {
+            get { return _nombre; }
+        }
+
+        public string Categoria
+        {
+            get { return _categoria; }
+        }
+
+        public double Precio
+        {
+            get { return _precio; } 
+        }
+        
         public void Validar()
         {
             if (string.IsNullOrEmpty(_nombre)) throw new Exception("El nombre no puede estar vacio");
@@ -35,22 +55,7 @@ namespace Dominio
             return $"Categoría: {_categoria} - Nombre: {_nombre} - Precio: ${_precio}";
         }
 
-        //Getters
-        public string Categoria
-        {
-            get { return _categoria; }
-
-        }
-
-        public string Nombre
-        {
-            get { return _nombre; }
-        }
-
-        public int Id
-        {
-            get { return _id; }
-        }
+    
 
 
         public override bool Equals(object obj)
