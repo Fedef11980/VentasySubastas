@@ -13,15 +13,12 @@ namespace Web.Controllers
         }
 
 
-        public IActionResult VistaVentas()
+        public IActionResult ListarPublicaciones()
         {
-            ViewBag.ListadoArticulosVenta = miSistema.Articulos;
+            ViewBag.ListadoPublicaciones = miSistema.Publicaciones;
             return View();
         }
 
-        public IActionResult VistaSubastas()
-        {
-            return View();
-        }
+        
     }
 }

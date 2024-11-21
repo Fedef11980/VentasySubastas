@@ -9,6 +9,11 @@ namespace Web.Controllers
     {
        private Sistema miSistema = Sistema.Instancia;
 
+        public HomeController()
+        {
+            
+        }
+
         public IActionResult Index()
         {
             return View();
