@@ -168,35 +168,36 @@ namespace Dominio
             AsignarArticuloAPublicacion(10, 50); // Pelota de playa
 
             // Precarga de Ventas
-            AsignarArticuloAPublicacion(1, 11); // Consola de videojuegos
-            AsignarArticuloAPublicacion(1, 19); // Videojuego
-            AsignarArticuloAPublicacion(2, 14); // Lámpara de pie
-            AsignarArticuloAPublicacion(2, 42); // Cortinas
-            AsignarArticuloAPublicacion(2, 13); // Mesa de comedor
-            AsignarArticuloAPublicacion(3, 17); // Muñeca
-            AsignarArticuloAPublicacion(3, 20); // Rompecabezas 1000 piezas
-            AsignarArticuloAPublicacion(3, 49); // Lego
-            AsignarArticuloAPublicacion(4, 25); // Mouse inalámbrico
-            AsignarArticuloAPublicacion(4, 21); // Reloj inteligente
-            AsignarArticuloAPublicacion(4, 26); // Impresora
-            AsignarArticuloAPublicacion(5, 7);  // Teléfono móvil
-            AsignarArticuloAPublicacion(5, 9);  // Tablet
-            AsignarArticuloAPublicacion(5, 16); // Microondas
-            AsignarArticuloAPublicacion(6, 40); // Estufa
-            AsignarArticuloAPublicacion(6, 27); // Silla de oficina
-            AsignarArticuloAPublicacion(6, 28); // Cama
-            AsignarArticuloAPublicacion(7, 38); // Smart TV
-            AsignarArticuloAPublicacion(7, 37); // Consola de videojuegos
-            AsignarArticuloAPublicacion(7, 39); // Cargador portátil
-            AsignarArticuloAPublicacion(8, 12); // Monitor 24 pulgadas
-            AsignarArticuloAPublicacion(8, 11); // Laptop
-            AsignarArticuloAPublicacion(8, 26); // Impresora
-            AsignarArticuloAPublicacion(9, 17); // Muñeca
-            AsignarArticuloAPublicacion(9, 21); // Juguete de construcción
-            AsignarArticuloAPublicacion(9, 49); // Lego
-            AsignarArticuloAPublicacion(10, 14); // Lámpara de pie
-            AsignarArticuloAPublicacion(10, 42); // Cortinas
-            AsignarArticuloAPublicacion(10, 43); // Juego de mesa
+            AsignarArticuloAPublicacion(11, 11); // Consola de videojuegos
+            AsignarArticuloAPublicacion(11, 19); // Videojuego
+            AsignarArticuloAPublicacion(11, 14); // Lámpara de pie
+            AsignarArticuloAPublicacion(12, 42); // Cortinas
+            AsignarArticuloAPublicacion(12, 13); // Mesa de comedor
+            AsignarArticuloAPublicacion(12, 17); // Muñeca
+            AsignarArticuloAPublicacion(13, 20); // Rompecabezas 1000 piezas
+            AsignarArticuloAPublicacion(13, 49); // Lego
+            AsignarArticuloAPublicacion(13, 25); // Mouse inalámbrico
+            AsignarArticuloAPublicacion(14, 21); // Reloj inteligente
+            AsignarArticuloAPublicacion(14, 26); // Impresora
+            AsignarArticuloAPublicacion(14, 7);  // Teléfono móvil
+            AsignarArticuloAPublicacion(15, 9);  // Tablet
+            AsignarArticuloAPublicacion(15, 16); // Microondas
+            AsignarArticuloAPublicacion(15, 40); // Estufa
+            AsignarArticuloAPublicacion(16, 27); // Silla de oficina
+            AsignarArticuloAPublicacion(16, 28); // Cama
+            AsignarArticuloAPublicacion(16, 38); // Smart TV
+            AsignarArticuloAPublicacion(17, 37); // Consola de videojuegos
+            AsignarArticuloAPublicacion(17, 39); // Cargador portátil
+            AsignarArticuloAPublicacion(17, 12); // Monitor 24 pulgadas
+            AsignarArticuloAPublicacion(18, 11); // Laptop
+            AsignarArticuloAPublicacion(18, 26); // Impresora
+            AsignarArticuloAPublicacion(18, 17); // Muñeca
+            AsignarArticuloAPublicacion(19, 21); // Juguete de construcción
+            AsignarArticuloAPublicacion(19, 49); // Lego
+            AsignarArticuloAPublicacion(19, 14); // Lámpara de pie
+            AsignarArticuloAPublicacion(20, 42); // Cortinas
+            AsignarArticuloAPublicacion(20, 43); // Juego de mesa
+            AsignarArticuloAPublicacion(20, 23); // Camara Fotográfica
         }
 
         private void PrecargarUsuarios()
@@ -220,6 +221,9 @@ namespace Dominio
             AgregarOfertaAUnaSubasta(1, 1, 500, new DateTime(2023, 05, 11));
             AgregarOfertaAUnaSubasta(2, 1, 600, new DateTime(2023, 06, 12));
         }
+
+
+
 
         public void AltaArticulo(Articulo articulo)
         {
@@ -271,13 +275,6 @@ namespace Dominio
             publicacionBuscada.AgregarArticulo(articuloBuscado);// Asignar el artículo a la publicación
         }
 
-        public void AltaUsuario(Usuario usuario)
-        {
-            if (usuario == null) throw new Exception("el usuario no puede ser nulo");
-            usuario.Validar();
-            _usuarios.Add(usuario);
-        }
-
         public Articulo ObtenerArticuloPorId(int id)
         {
             Articulo buscada = null;
@@ -302,7 +299,7 @@ namespace Dominio
             return articulosFiltrados;
         }
 
-        public List<Publicacion> ListarPublicaciones(DateTime fecha1, DateTime fecha2)
+        public List<Publicacion> ListarPublicaciones (DateTime fecha1, DateTime fecha2)
         {
             List<Publicacion> publicaciones = new List<Publicacion>();
             foreach(Publicacion p in _publicaciones)
@@ -354,6 +351,25 @@ namespace Dominio
             if (subastaBuscada == null) throw new Exception ("El id de la subasta no existe");
             Oferta ofertas = new Oferta(clientebuscado, monto, fecha);
             subastaBuscada.AgregarOferta(ofertas);
-        }       
+        }
+
+        public Publicacion ObtenerPublicacionPorId(int id)
+        {
+            Publicacion buscada = null;
+            int i = 0;
+            while(i<_publicaciones.Count && buscada == null)
+            {
+                if (_publicaciones[i].Id == id) buscada = _publicaciones[i];
+                i++;
+            }
+            return buscada;
+        }
+
+        public void AltaUsuario(Usuario usuario)
+        {
+            if (usuario == null) throw new Exception("el usuario no puede ser nulo");
+            usuario.Validar();
+            _usuarios.Add(usuario);
+        }
     }
 }

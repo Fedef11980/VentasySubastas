@@ -11,14 +11,15 @@ namespace Dominio
     public class Articulo : IValidable
     {
         private int _id;
-        private static int _ultId = 1;
+        private static int s_ultId = 1;
         private string _nombre;
         private string _categoria;
         private double _precio;
 
         public Articulo( string nombre, string categoria, double precio)
         {
-            _id = _ultId++;
+            _id = s_ultId;
+            s_ultId++;
             _nombre = nombre;
             _categoria = categoria;
             _precio = precio;

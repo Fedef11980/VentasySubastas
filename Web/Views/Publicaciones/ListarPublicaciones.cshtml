@@ -8,6 +8,24 @@
 <br />
 <br />
 
+<!-- ver con ayudantia con ayudantía para que en la columna salga el tipo de publicacion venta o subasta y metodos en el controller -->
+
+
+<form class="row row-cols-lg-auto g-3 align-items-center" method="get" action="/publicaciones/porpublicaciones">
+    <div class="col-12">
+        <input class="form-control" type="text" placeholder="Ingrese tipo de publicacion" name="publicacion" />
+    </div>
+
+    <div class="col-12">
+        <input class="btn btn-success" type="submit" value="Buscar" />
+    </div>
+
+    <div class="col-12">
+        <a href="/publicaciones/porpublicaciones" class="btn btn-secundary">Reiniciar</a>
+    </div>
+</form>
+
+
 @if (ViewBag.ListadoPublicaciones == null || ViewBag.ListadoPublicaciones.Count == 0)
 {
     <div class="alert alert-danger"><p>No hay articulos en el sistema</p></div>
@@ -19,6 +37,7 @@ else
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th>Tipo Publicacion</th>
                 <th>Categoría</th>
                 <th>Precio</th>
             </tr>
@@ -29,6 +48,7 @@ else
                 <tr>
                     <td>@p.Id</td>
                     <td>@p.Nombre</td>
+                    <td>@p.Articulos </td> 
                     <td>@p.Estado</td>
                     <td>@p.CalcularPrecio()</td>
                 </tr>
