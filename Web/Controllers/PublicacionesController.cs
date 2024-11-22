@@ -12,25 +12,20 @@ namespace Web.Controllers
             ViewBag.ListadoPublicaciones = miSistema.Publicaciones;
             return View();
         }
-
-        public IActionResult PorPublicaciones()
-        {
-            return View();
-        }
-
-        public IActionResult ProcesarPorPublicacion(string publicacion)
+              
+        public IActionResult BuscarPorPublicacion(string publicacion)
         {
             try
             {
                 if (string.IsNullOrEmpty(publicacion)) throw new Exception ("Debe ingresar un tipo de publicacion");
-                ViewBag.Publicacion = miSistema.Publicaciones; 
+                ViewBag.ListadoPublicaciones = miSistema.ObtenerPublicacionPorTipo(publicacion); 
             }
             catch (Exception ex)  
             {
                 ViewBag.Error=ex.Message;
             }
 
-            return View("PorPublicacion");
+            return View("ListarPublicaciones");
         }
 
         

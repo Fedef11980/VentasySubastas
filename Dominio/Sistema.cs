@@ -223,8 +223,6 @@ namespace Dominio
         }
 
 
-
-
         public void AltaArticulo(Articulo articulo)
         {
             if (articulo == null) throw new Exception("El articulo no puede ser nulo");
@@ -365,6 +363,18 @@ namespace Dominio
             return buscada;
         }
 
+        public List<Publicacion> ObtenerPublicacionPorTipo(string tipoPublicacion)
+        {
+            List<Publicacion> buscadas = new List<Publicacion>();
+            foreach (Publicacion p in _publicaciones)
+            {
+                if (p.GetType().Name.ToLower() == tipoPublicacion.ToLower()) buscadas.Add(p);
+            }
+            return buscadas;
+        }
+
+        //Cuando obtenemos el stgring del parámetro y el nombre pasarlo todo a misnucula o mayuscula
+            
         public void AltaUsuario(Usuario usuario)
         {
             if (usuario == null) throw new Exception("el usuario no puede ser nulo");
