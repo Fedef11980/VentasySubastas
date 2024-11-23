@@ -16,6 +16,11 @@ namespace Dominio
             _saldoDispBill = saldoDispBill;            
         }
 
+        public decimal SaldoDisponibleBilletera
+        {
+            get {  return _saldoDispBill; }    
+        }
+
         public override void Validar()
         {
             if (_saldoDispBill <= 0) throw new Exception("El saldo no puede ser negativo o menor que cero");

@@ -26,5 +26,10 @@ namespace Dominio
             if (_ofertaRelampago) precio *= 0.8;
             return precio;
         }
+
+        public override string TipoDePublicacíon()
+        {
+            return "Venta";
+        }
     }
 }

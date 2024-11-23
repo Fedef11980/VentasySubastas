@@ -1,0 +1,29 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "DetallePublicación";
+
+}
+
+<h1>Detalle Publicación</h1>
+<br />
+@if (ViewBag.detallePublicacion == null)
+{
+    <div class="alert alert-danger">Publicación inexistente</div>
+}
+else
+{
+    Publicacion p = ViewBag.detallePublicacion;
+    <p> <strong>Id: @p.Id</strong></p>
+    <P><strong>Nombre: @p.Nombre</strong></P>
+
+
+
+    
+
+    <P><strong>Articulos:</strong></P>
+    <P><strong>Monto:@p.CalcularPrecio()</strong></P>
+           
+                         
+}   
+
+

@@ -368,18 +368,35 @@ namespace Dominio
             List<Publicacion> buscadas = new List<Publicacion>();
             foreach (Publicacion p in _publicaciones)
             {
-                if (p.GetType().Name.ToLower() == tipoPublicacion.ToLower()) buscadas.Add(p);
+                if (p.TipoDePublicacíon().ToLower() == tipoPublicacion.ToLower()) buscadas.Add(p);
             }
             return buscadas;
         }
 
-        //Cuando obtenemos el stgring del parámetro y el nombre pasarlo todo a misnucula o mayuscula
-            
         public void AltaUsuario(Usuario usuario)
         {
             if (usuario == null) throw new Exception("el usuario no puede ser nulo");
             usuario.Validar();
             _usuarios.Add(usuario);
         }
+
+        /*public List<Articulo> VerArticulo()
+        {
+            List<Articulo> buscado = new List<Articulo();
+
+            foreach (Publicacion p in ViewBag.detallePublicacion)
+            {
+                if (p.Articulos == ViewBag.detallePublicacion) buscado.Add(p);
+            }
+            return buscado;
+        }*/
+
+        /*public Cliente CargarSaldoEnBilletera(Cliente cliente, double saldo)
+        {
+            Cliente clienteBuscado = null;
+            int i = 0;
+
+
+        }*/
     }
 }

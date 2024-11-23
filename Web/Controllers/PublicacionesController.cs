@@ -28,6 +28,10 @@ namespace Web.Controllers
             return View("ListarPublicaciones");
         }
 
-        
+        public IActionResult DetallePublicacion(int id) 
+        {
+            ViewBag.detallePublicacion = miSistema.ObtenerPublicacionPorId(id);   
+            return View();  
+        }        
     }
 }

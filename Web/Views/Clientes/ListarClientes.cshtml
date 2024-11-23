@@ -1,7 +1,39 @@
-﻿
+﻿@using Dominio;
 @{
     ViewData["Title"] = "ListarClientes";
+  
 }
 
-<h1>ListarClientes</h1>
+<h1>Listar Clientes</h1>
 
+<br />
+@if (ViewBag.Listado == null || ViewBag.Listado.Count == 0)
+{
+    <div class="alert alert-danger"><p>Ese tipo de publicación no exite en el sistema</p></div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Saldo Billetera</th>               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cliente c in ViewBag.Listado)
+            {               
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.Nombre</td>
+                    <td>@c.Apellido</td>
+                    <td>@c.SaldoDisponibleBilletera</td> 
+                 
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

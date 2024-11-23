@@ -37,6 +37,7 @@ else
                 <th>Tipo Publicacion</th>
                 <th>Categoría</th>
                 <th>Precio</th>
+                <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
@@ -45,9 +46,10 @@ else
                 <tr>
                     <td>@p.Id</td>
                     <td>@p.Nombre</td>
-                    <td>@p.GetType().Name</td> 
+                    <td>@p.TipoDePublicacíon()</td> 
                     <td>@p.Estado</td>
                     <td>@p.CalcularPrecio()</td>
+                    <td><a href="/publicaciones/DetallePublicacion?Id=@p.Id">Detalle</a></td>
                 </tr>
             }
         </tbody>

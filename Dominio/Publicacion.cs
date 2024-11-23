@@ -88,6 +88,10 @@ namespace Dominio
             }
         }
 
+
+        //Polimorfismo - Herencia
+        public abstract string TipoDePublicacíon();
+        
         public abstract double CalcularPrecio();
 
       

@@ -44,6 +44,11 @@ namespace Dominio
             return _ofertas.Max(o => o.Monto);
         }
 
+        public override string TipoDePublicacíon()
+        {
+            return "Subasta";
+        }
+
 
 
 

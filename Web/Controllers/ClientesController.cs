@@ -12,5 +12,11 @@ namespace Web.Controllers
             ViewBag.Listado = miSistema.ListarClientes();
             return View();
         }
+
+        public IActionResult CargarSaldo()
+        {
+
+            return View();
+        }
     }
 }
