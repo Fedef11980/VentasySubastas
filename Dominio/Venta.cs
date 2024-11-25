@@ -27,7 +27,7 @@ namespace Dominio
             return precio;
         }
 
-        public override string TipoDePublicacíon()
+        public override string TipoDePublicacion()
         {
             return "Venta";
         }

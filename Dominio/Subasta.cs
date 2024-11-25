@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Subasta : Publicacion 
+    public class Subasta : Publicacion
     {
 
         private List<Oferta> _ofertas = new List<Oferta>();
@@ -44,7 +44,7 @@ namespace Dominio
             return _ofertas.Max(o => o.Monto);
         }
 
-        public override string TipoDePublicacíon()
+        public override string TipoDePublicacion()
         {
             return "Subasta";
         }

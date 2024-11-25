@@ -372,7 +372,7 @@ namespace Dominio
             List<Publicacion> buscadas = new List<Publicacion>();
             foreach (Publicacion p in _publicaciones)
             {
-                if (p.TipoDePublicacíon().ToLower() == tipoPublicacion.ToLower()) buscadas.Add(p);
+                if (p.TipoDePublicacion().ToLower() == tipoPublicacion.ToLower()) buscadas.Add(p);
             }
             return buscadas;
         }

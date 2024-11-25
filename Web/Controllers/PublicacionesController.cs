@@ -46,6 +46,23 @@ namespace Web.Controllers
             return View();
         }
 
+        public IActionResult ProcesarAltaSubasta(double monto)
+        {
+            try
+            {
+                if (monto < 0) throw new Exception("El monto tiene que ser mayor a cero");
+                Subasta s = new Subasta(monto);
+               // miSistema.AgregarOfertaAUnaSubasta(s);
+                ViewBag.Exito = $"La usbasta se ingresó con exito";
+            }
+            catch(Exception ex) 
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return View();  
+        }
+
+
         public IActionResult DetalleArticulo()
         {
             ViewBag.detalleArticulo = miSistema.Articulos;
