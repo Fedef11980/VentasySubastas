@@ -397,6 +397,19 @@ namespace Dominio
             return buscada;
         }
 
+        public Usuario Login(string email, string pass)
+        {
+            Usuario usuarioBuscado = null;
+            int i = 0;
+            while (usuarioBuscado == null && i < _usuarios.Count)
+            {
+                if (_usuarios[i].Email == email && _usuarios[i].Contrasena == pass) usuarioBuscado = _usuarios[i];
+                i++;
+            }
+
+            return usuarioBuscado;
+        }
+
         /*public List<Articulo> VerArticulo()
         {
             List<Articulo> buscado = new List<Articulo();

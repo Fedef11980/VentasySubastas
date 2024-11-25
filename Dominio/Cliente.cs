@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Cliente : Usuario
+    public class Cliente : Usuario, IValidable
     {
         private decimal _saldoDispBill;        
 
@@ -16,6 +17,8 @@ namespace Dominio
             _saldoDispBill = saldoDispBill;            
         }
 
+
+        //Getter
         public decimal SaldoDisponibleBilletera
         {
             get {  return _saldoDispBill; }    
@@ -37,8 +40,11 @@ namespace Dominio
             Cliente cl = obj as Cliente;
             return cl != null && this._id == cl._id;
         }
-
-
+        
+        public override string Rol()
+        {
+            return "Cliente";
+        }
 
     }
 }

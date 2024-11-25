@@ -87,8 +87,7 @@ namespace Dominio
                  throw new Exception("El artículo ya está asociado a esta publicación");
             }
         }
-
-        //Polimorfismo - Herencia
+                
         public abstract string TipoDePublicacion();
         
         public abstract double CalcularPrecio();

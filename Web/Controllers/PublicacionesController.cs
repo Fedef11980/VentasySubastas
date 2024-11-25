@@ -46,7 +46,7 @@ namespace Web.Controllers
             return View();
         }
 
-        public IActionResult ProcesarAltaSubasta(double monto)
+        /*public IActionResult ProcesarAltaSubasta(double monto)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Web.Controllers
                 ViewBag.Error = ex.Message;
             }
             return View();  
-        }
+        }*/
 
 
         public IActionResult DetalleArticulo()

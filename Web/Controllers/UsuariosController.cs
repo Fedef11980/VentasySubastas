@@ -5,11 +5,9 @@ namespace Web.Controllers
 {
     public class UsuariosController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+        Sistema miSistema = Sistema.Instancia;
+        
         [HttpGet]
         public IActionResult Login()
         {
@@ -33,7 +31,6 @@ namespace Web.Controllers
                 HttpContext.Session.SetString("rol", usuario.Rol());
 
                 return RedirectToAction("Index", "Home");
-
             }
             catch (Exception ex)
             {
@@ -48,9 +45,6 @@ namespace Web.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
-
-
-
     }
 }
-}
+
