@@ -30,19 +30,11 @@ namespace Dominio
                 if (s_instancia == null) s_instancia = new Sistema();
                 return s_instancia;
             }    
-        }        
-
-        public Articulo ObtenerCategoria(string categoria) // buscar articulos
+        }
+        //Getters
+        public List<Usuario> Usuarios
         {
-            Articulo buscada = null;
-            int i = 0;
-            while (i < _articulos.Count && buscada == null)
-            {
-                if (_articulos[i].Categoria.ToUpper() == categoria.ToUpper())
-                buscada = _articulos[i];
-                i++;
-            }
-            return buscada;
+            get { return _usuarios; }
         }
 
         public List<Articulo> Articulos
@@ -109,6 +101,7 @@ namespace Dominio
             AltaArticulo(new Articulo("Lego", "Juguetería", 100));            
         }
         
+        //revisar con Marcio
         private void PrecargarPublicaciones()
         {   //Subastas
             AltaPublicacion(new Subasta("Vacaciones en la Playa", new DateTime(2023, 05, 11), new DateTime(2023, 06, 11), Estado.ABIERTA)); 
@@ -221,7 +214,6 @@ namespace Dominio
             AgregarOfertaAUnaSubasta(1, 1, 500, new DateTime(2023, 05, 11));
             AgregarOfertaAUnaSubasta(2, 1, 600, new DateTime(2023, 06, 12));
         }
-
 
         public void AltaArticulo(Articulo articulo)
         {
@@ -390,6 +382,19 @@ namespace Dominio
             if (usuario == null) throw new Exception("el usuario no puede ser nulo");
             usuario.Validar();
             _usuarios.Add(usuario);
+        }
+
+        public Articulo ObtenerCategoria(string categoria) // buscar articulos
+        {
+            Articulo buscada = null;
+            int i = 0;
+            while (i < _articulos.Count && buscada == null)
+            {
+                if (_articulos[i].Categoria.ToUpper() == categoria.ToUpper())
+                    buscada = _articulos[i];
+                i++;
+            }
+            return buscada;
         }
 
         /*public List<Articulo> VerArticulo()

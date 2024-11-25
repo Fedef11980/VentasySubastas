@@ -28,19 +28,6 @@ namespace Dominio
 
         }
 
-        public virtual void Validar()
-        {
-            if (string.IsNullOrEmpty(_nombre)) throw new Exception("El nombre no puede ser vacio");
-            if (string.IsNullOrEmpty(_apellido)) throw new Exception("El nombre no puede ser vacio");
-            if (string.IsNullOrEmpty(_contrasena)) throw new Exception("La contraseña  no puede ser vacio");
-            if (string.IsNullOrEmpty(_email)) throw new Exception("El emial no puede ser vacio");
-        }
-
-        public override string ToString()
-        {
-            return $"Nombre:{_nombre} - Apellido:{_apellido} - ";
-        }
-
         public string Nombre
         {
             get { return _nombre; }
@@ -55,5 +42,26 @@ namespace Dominio
         {
             get { return _id; }
         }
+
+        public string Email { get { return _email; } }
+
+        public string Contrasena { get { return _contrasena; } }
+
+        public virtual void Validar()
+        {
+            if (string.IsNullOrEmpty(_nombre)) throw new Exception("El nombre no puede ser vacio");
+            if (string.IsNullOrEmpty(_apellido)) throw new Exception("El nombre no puede ser vacio");
+            if (string.IsNullOrEmpty(_contrasena)) throw new Exception("La contraseña  no puede ser vacio");
+            if (string.IsNullOrEmpty(_email)) throw new Exception("El emial no puede ser vacio");
+        }
+
+        public override string ToString()
+        {
+            return $"Nombre:{_nombre} - Apellido:{_apellido} - ";
+        }
+
+        public abstract string Rol();
+
+
     }
 }
