@@ -1,29 +1,54 @@
 ﻿@using Dominio;
 @{
-    ViewData["Title"] = "DetallePublicación";
-
+    ViewData["Title"] = "DetallePublicacion";
 }
 
 <h1>Detalle Publicación</h1>
+
 <br />
+<br />
+
 @if (ViewBag.detallePublicacion == null)
 {
     <div class="alert alert-danger">Publicación inexistente</div>
 }
 else
 {
+
     Publicacion p = ViewBag.detallePublicacion;
-    <p> <strong>Id: @p.Id</strong></p>
+
+
+    <p><strong>Id: @p.Id</strong></p>
     <P><strong>Nombre: @p.Nombre</strong></P>
-
-
-
+    <P><strong>Monto: @p.CalcularPrecio()</strong></P>
+    <br />
+    <tbody>
+        @foreach (Articulo a in p.Articulos)
+        {
+            <tr>
+                <td><p><strong>Articulos: @a.Nombre</strong></p></td>
+            </tr>
+        }
+    </tbody>
+    <br />
+    <br />
+    @if (ViewBag.detallePublicacion is Venta venta)
+    {
+        <form>
+            <label>Haga click en el botón para comprar</label><br /><br />
+            <input class="btn btn-success" type="submit" value="Comprar"/>
+        </form>
+    }
+    else if (ViewBag.detallePublicacion is Subasta subasta)
+    {
+        <form>            
+            <label>Monto</label>           
+            <br />
+            <input type="number" placeholder="Ingrese monto" />
+            <br />
+            <p><strong>Ingrese un precio mayor al último ingresado si va a subastar</strong></p>
+        </form>
+    }
     
 
-    <P><strong>Articulos:</strong></P>
-    <P><strong>Monto:@p.CalcularPrecio()</strong></P>
-           
-                         
-}   
-
-
+}

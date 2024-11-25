@@ -22,16 +22,34 @@ namespace Web.Controllers
             }
             catch (Exception ex)  
             {
-                ViewBag.Error=ex.Message;
+                ViewBag.Error = ex.Message;
             }
 
             return View("ListarPublicaciones");
         }
 
-        public IActionResult DetallePublicacion(int id) 
+        public IActionResult DetallePublicacion(int id)
         {
-            ViewBag.detallePublicacion = miSistema.ObtenerPublicacionPorId(id);   
+            ViewBag.detallePublicacion = miSistema.ObtenerPublicacionPorId(id);
             return View();  
-        }        
+        }
+
+        public IActionResult AltaPublicacionVenta(int id) 
+        {
+            ViewBag.altaPublicacionVenta = miSistema.ObternerVentaPorId(id);   
+            return View();  
+        }
+        
+        public IActionResult AltaPublicacionesSubastas(int id) 
+        {
+            ViewBag.altaPublicacionSubastas = miSistema.ObternerSubastaPorId(id);
+            return View();
+        }
+
+        public IActionResult DetalleArticulo()
+        {
+            ViewBag.detalleArticulo = miSistema.Articulos;
+            return View();  
+        }
     }
 }

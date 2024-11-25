@@ -19,7 +19,8 @@ else
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Saldo Billetera</th>               
+                <th>Saldo Billetera</th>   
+                <th>Detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -29,11 +30,11 @@ else
                     <td>@c.Id</td>
                     <td>@c.Nombre</td>
                     <td>@c.Apellido</td>
-                    <td>@c.SaldoDisponibleBilletera</td> 
-                 
+                    <td>@c.SaldoDisponibleBilletera</td>    
+                    <td><a href="/clientes/">Modificar Billetera</a></td>
                 </tr>
             }
         </tbody>
     </table>
-
 }
+

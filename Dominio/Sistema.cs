@@ -341,6 +341,18 @@ namespace Dominio
             return buscada;
         }
 
+        public Venta ObternerVentaPorId(int id)
+        {
+            Venta ventaBuscada = null;
+            int i = 0;
+            while (i < _publicaciones.Count && ventaBuscada == null)
+            {
+                if (_publicaciones[i].Id == id && _publicaciones[i] is Venta) ventaBuscada = _publicaciones[i] as Venta; // Convertimos la publicación en subasta
+                i++;
+            }
+            return ventaBuscada;
+        }
+
         public void AgregarOfertaAUnaSubasta(int idCliente, int idSubasta, double monto, DateTime fecha)
         {
             Cliente clientebuscado = ObtenerUsuarioPorId(idCliente);
