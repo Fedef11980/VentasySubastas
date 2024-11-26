@@ -377,15 +377,14 @@ namespace Dominio
             }
             return buscadas;
         }
-
-        public void AltaUsuario(Usuario usuario)
+         public void AltaUsuario(Usuario usuario)
         {
             if (usuario == null) throw new Exception("el usuario no puede ser nulo");
             usuario.Validar();
             _usuarios.Add(usuario);
         }
 
-        public Articulo ObtenerCategoria(string categoria) // buscar articulos
+        public Articulo ObtenerCategoria(string categoria) // buscar articulos en publicaciones
         {
             Articulo buscada = null;
             int i = 0;
@@ -421,14 +420,13 @@ namespace Dominio
             return buscado;
         }*/
 
-        public void CargarSaldoEnBilletera(int id, decimal saldo)
+        public void CargarSaldoEnBilletera(int idCliente, decimal nuevoSaldo)
         {
-            Cliente clienteBuscado = ObtenerUsuarioPorId(id);
+            Cliente clienteBuscado = ObtenerUsuarioPorId(idCliente);
 
-            if (clienteBuscado != null && saldo > 0)
-            {
-                clienteBuscado.AgregarSaldo(saldo); 
-            }           
+            if (clienteBuscado == null) throw new Exception("El cliente no se encontró");
+             clienteBuscado.AgregarSaldo(nuevoSaldo); 
+                       
         }
     }
 }

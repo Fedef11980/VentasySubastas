@@ -17,16 +17,16 @@ namespace Dominio
             _saldoDispBill = saldoDispBill;            
         }
 
-
         //Getter
         public decimal SaldoDisponibleBilletera
         {
             get {  return _saldoDispBill; }            
         }
 
-        public void AgregarSaldo (decimal saldo)
+        public void AgregarSaldo (decimal nuevoSaldo)
         {
-            _saldoDispBill += saldo;
+            if (nuevoSaldo < 0) throw new Exception("El saldo tiene que ser mayor que cero");
+            _saldoDispBill += nuevoSaldo;
         }
 
         public override void Validar()

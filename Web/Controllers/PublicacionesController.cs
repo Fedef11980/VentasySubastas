@@ -44,11 +44,11 @@ namespace Web.Controllers
             return View();  
         }
         
-        /*public IActionResult AltaPublicacionesSubastas(int id) 
+        public IActionResult ListarPublicacionesSubastas(int id) 
         {
             ViewBag.altaPublicacionSubastas = miSistema.ObternerSubastaPorId(id);
             return View();
-        }*/
+        }
 
         /*public IActionResult ProcesarAltaSubasta(double monto)
         {
