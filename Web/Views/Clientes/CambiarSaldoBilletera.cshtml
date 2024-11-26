@@ -16,11 +16,14 @@
 }
 <br />
 <form method="post" action="/clientes/CambiarSaldoBilletera">
-    <div class="form-group">                
-       @foreach (Cliente c in Sistema.Instancia.Usuarios)
-       {
-           <p name="IdCliente">@c.Nombre</p>
-       }        
+    <div class="form-group">
+        @foreach (Usuario u in Sistema.Instancia.Usuarios)
+        {
+            if (u is Cliente c)
+            {
+                <p name="IdCliente">@c.Nombre</p>
+            }
+        }
     </div>
     <br />
     <div class="form-group">
