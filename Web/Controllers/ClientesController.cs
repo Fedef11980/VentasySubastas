@@ -1,5 +1,6 @@
 ﻿using AspNetCoreGeneratedDocument;
 using Dominio;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -20,9 +21,8 @@ namespace Web.Controllers
             return View();
         }
 
-        public IActionResult CargarSaldo()
-        {
-            
+        public IActionResult CargarSaldoBilletera()
+        {            
             return View();
         }
     }

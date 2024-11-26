@@ -31,6 +31,7 @@ namespace Dominio
                 return s_instancia;
             }    
         }
+
         //Getters
         public List<Usuario> Usuarios
         {
@@ -406,7 +407,6 @@ namespace Dominio
                 if (_usuarios[i].Email == email && _usuarios[i].Contrasena == pass) usuarioBuscado = _usuarios[i];
                 i++;
             }
-
             return usuarioBuscado;
         }
 
@@ -421,12 +421,14 @@ namespace Dominio
             return buscado;
         }*/
 
-        /*public Cliente CargarSaldoEnBilletera(Cliente cliente, double saldo)
+        public void CargarSaldoEnBilletera(int id, decimal saldo)
         {
-            Cliente clienteBuscado = null;
-            int i = 0;
+            Cliente clienteBuscado = ObtenerUsuarioPorId(id);
 
-
-        }*/
+            if (clienteBuscado != null && saldo > 0)
+            {
+                clienteBuscado.AgregarSaldo(saldo); 
+            }           
+        }
     }
 }

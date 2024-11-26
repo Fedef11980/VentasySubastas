@@ -27,6 +27,13 @@ namespace Dominio
             _contrasena = contrasena;
 
         }
+        
+
+        //Getters
+        public int Id
+        {
+            get { return _id; }
+        }
 
         public string Nombre
         {
@@ -36,16 +43,17 @@ namespace Dominio
         public string Apellido
         {
             get { return _apellido; }
+        }      
+
+        public string Email 
+        { 
+            get { return _email; } 
         }
 
-        public int Id
-        {
-            get { return _id; }
+        public string Contrasena 
+        { 
+            get { return _contrasena; } 
         }
-
-        public string Email { get { return _email; } }
-
-        public string Contrasena { get { return _contrasena; } }
 
         public virtual void Validar()
         {

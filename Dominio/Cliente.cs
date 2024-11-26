@@ -21,7 +21,12 @@ namespace Dominio
         //Getter
         public decimal SaldoDisponibleBilletera
         {
-            get {  return _saldoDispBill; }    
+            get {  return _saldoDispBill; }            
+        }
+
+        public void AgregarSaldo (decimal saldo)
+        {
+            _saldoDispBill += saldo;
         }
 
         public override void Validar()

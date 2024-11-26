@@ -5,14 +5,16 @@ namespace Web.Controllers
 {
     public class PublicacionesController : Controller
     {
-        private Sistema miSistema = Sistema.Instancia; 
+        private Sistema miSistema = Sistema.Instancia;
 
+        [HttpGet]
         public IActionResult ListarPublicaciones()
         {
             ViewBag.ListadoPublicaciones = miSistema.Publicaciones;
             return View();
         }
-              
+
+        [HttpGet]
         public IActionResult BuscarPorPublicacion(string publicacion)
         {
             try
@@ -34,17 +36,19 @@ namespace Web.Controllers
             return View();  
         }
 
+
+        //Metodos para ver subastas con administrador
         public IActionResult AltaPublicacionVenta(int id) 
         {
             ViewBag.altaPublicacionVenta = miSistema.ObternerVentaPorId(id);   
             return View();  
         }
         
-        public IActionResult AltaPublicacionesSubastas(int id) 
+        /*public IActionResult AltaPublicacionesSubastas(int id) 
         {
             ViewBag.altaPublicacionSubastas = miSistema.ObternerSubastaPorId(id);
             return View();
-        }
+        }*/
 
         /*public IActionResult ProcesarAltaSubasta(double monto)
         {
@@ -52,8 +56,8 @@ namespace Web.Controllers
             {
                 if (monto < 0) throw new Exception("El monto tiene que ser mayor a cero");
                 Subasta s = new Subasta(monto);
-               // miSistema.AgregarOfertaAUnaSubasta(s);
-                ViewBag.Exito = $"La usbasta se ingresó con exito";
+                miSistema.AgregarOfertaAUnaSubasta(s);
+                ViewBag.Exito = $"La subasta se ingresó con exito";
             }
             catch(Exception ex) 
             {

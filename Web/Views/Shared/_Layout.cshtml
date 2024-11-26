@@ -26,12 +26,17 @@
                         {
                             @if (Context.Session.GetString("rol") == "Admin")
                             {
-
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="clientes" asp-action="ListarClientes">Clientes</a>
+                                </li>
                             }
                             @if (Context.Session.GetString("rol") == "Cliente")
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Publicaciones" asp-action="Listado">Publicaciones</a>
                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="publicaciones" asp-action="ListarPublicaciones">Publicaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="CargarSaldo">Cargar Billetera</a>
                                 </li>
                             }
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Logout">Salir</a>
@@ -42,12 +47,8 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Login">Login</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="publicaciones" asp-action="ListarPublicaciones">Publicaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="clientes" asp-action="ListarClientes">Clientes</a>
-                        </li>
+                       
+                        
                     </ul>
                 </div>
             </div>

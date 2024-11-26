@@ -8,7 +8,16 @@
 <h1>Detalle de Venta</h1>
 
 <br />
-<br />
+
+@if(ViewBag.Error !=null)
+{
+    <div><p class="alert alert-danger">@ViewBag.Error</p></div>
+}
+
+@if(ViewBag.Exito != null)
+{
+    <div><p class="alert alert-succes">@ViewBag.Exito</p></div>
+}
 
 @if (ViewBag.detallePublicacionVenta == null)
 {
@@ -16,14 +25,10 @@
 }
 else
 {
-
     Publicacion p = ViewBag.altaPublicacionVenta;
-
-
     <p><strong>Id: @p.Id</strong></p>
     <P><strong>Nombre: @p.Nombre</strong></P>
     <P><strong>Monto: @p.CalcularPrecio()</strong></P>
-
     <br />
     <br />
 
@@ -40,10 +45,8 @@ else
     <br />
 
     <form>
-
         <label>Haga click para comprar</label><br />
-        <input class="btn btn-success" type="submit" value="Comprar" />
-
+        <input class="btn btn-primary" type="submit" value="Comprar" /> 
     </form>
 }
 
