@@ -22,12 +22,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Registro">Registrarse</a>
+                        </li>
+
                         @if (Context.Session.GetString("rol") != null)
-                        {
+                        {                            
+
                             @if (Context.Session.GetString("rol") == "Admin")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="clientes" asp-action="ListarClientes">Clientes</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="ListarClientes">Clientes</a>
                                 </li>
                                  <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Publicaciones" asp-action="ListarPublicacionesSubasta">Lista de Subasta</a>
@@ -42,7 +47,6 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="CargarSaldoBilletera">Billetera</a>
                                 </li>                              
                             }
-
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Logout">Salir</a>
                         }
                         else

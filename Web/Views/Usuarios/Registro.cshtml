@@ -1,0 +1,45 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<h1 class="text-center">Registro</h1>
+
+<br />
+<br />
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if (ViewBag.Exito != null)
+{
+ <div class="alert alert-success">@ViewBag.Exito</div>
+} 
+
+<br />
+<br />
+
+    <form method="post" action="/usuarios/registro">
+        <div class="form-group">
+            <label class="form-label">Nombre</label>
+            <input type="text" placeholder="Ingrese nombre" class="form-control" name="Nombre" value="@ViewBag.Nombre" />
+        </div>
+        <div class="form-group">
+            <label class="form-label">Apellido</label>
+            <input type="text" placeholder="Ingrese Apellido" class="form-control" name="Apellido" value="@ViewBag.Apellido" />
+        </div>
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="text" placeholder="Ingrese Email" class="form-control" name="Email" value="@ViewBag.Email" />
+        </div>
+        <div class="form-group">
+            <label class="form-label">Contraseña</label>
+            <input type="password" placeholder="Ingrese cotraseña" class="form-control" name="Contrasena" value="@ViewBag.Contrasena" />
+        </div>
+        <br />
+        <input type="submit" value="Registrar" class="btn btn-secondary" />
+    </form>
+
+

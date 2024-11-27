@@ -44,6 +44,42 @@ namespace Web.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+        public IActionResult Registro()
+        {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Registro(string nombre, string apellido, string email, string contrasena)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(nombre)) throw new Exception("El nombre no puede ser vacio");
+                if (string.IsNullOrEmpty(apellido)) throw new Exception("El apellido no puede ser vacio");
+                if (string.IsNullOrEmpty(email)) throw new Exception("El email no puede ser vacio");
+                if (contrasena.Length < 8) throw new Exception("la clave debe tener minimo 8 digitos");
+
+                Usuario c = new Cliente(nombre, apellido, email, contrasena);
+                miSistema.AltaUsuario(c);
+                ViewBag.Exito = $"Usuario cliente {nombre} dada de alta con exito";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                ViewBag.Nombre = nombre;
+                ViewBag.Apellido = apellido;
+                ViewBag.email = email;
+                ViewBag.Contrasena = contrasena;
+            }
+            return View();
+        }
     }
 }
 

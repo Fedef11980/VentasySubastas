@@ -11,10 +11,17 @@ namespace Dominio
     {
         private decimal _saldoDispBill;        
 
-        public Cliente(string nombre, string apellido, string email, string contrasenia, decimal saldoDispBill) :
+        public Cliente(string nombre, string apellido, string email, string contrasenia, decimal saldoDispBill):
             base(nombre, apellido, email, contrasenia)
         {
             _saldoDispBill = saldoDispBill;            
+        }
+
+        // Constructor sin saldo (inicializa el saldo en 0)
+        public Cliente(string nombre, string apellido, string email, string contrasena)
+            : base(nombre, apellido, email, contrasena)
+        {
+            _saldoDispBill = 0;
         }
 
         //Getter
