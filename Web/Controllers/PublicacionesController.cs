@@ -26,7 +26,6 @@ namespace Web.Controllers
             {
                 ViewBag.Error = ex.Message;
             }
-
             return View("ListarPublicaciones");
         }
 
@@ -36,7 +35,7 @@ namespace Web.Controllers
             return View();  
         }
 
-        //Metodos para ver subastas con administrador
+        
         public IActionResult AltaPublicacionVenta(int id) 
         {
             ViewBag.altaPublicacionVenta = miSistema.ObternerVentaPorId(id);   
@@ -54,12 +53,17 @@ namespace Web.Controllers
             }
             catch (Exception ex)
             { 
+
                 ViewBag.Error = ex.Message; 
             }
             return RedirectToAction("ListarPublicaciones");
         }
-        
 
-        
+        //Metodos para ver subastas con administrador
+        public IActionResult ListarSubastas()
+        {
+            return View();
+        }
+
     }
 }
