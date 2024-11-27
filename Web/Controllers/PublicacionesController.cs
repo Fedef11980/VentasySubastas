@@ -43,34 +43,15 @@ namespace Web.Controllers
             ViewBag.altaPublicacionVenta = miSistema.ObternerVentaPorId(id);   
             return View();  
         }
-        
-        public IActionResult ListarPublicacionesSubastas(int id) 
+
+        [HttpGet]                
+        public IActionResult OfertaEnSubasta(int id, double monto) 
         {
-            ViewBag.altaPublicacionSubastas = miSistema.ObternerSubastaPorId(id);
+            int? idCliente = HttpContext.Session.GetInt32("id");
+            miSistema.AgregarOfertaAUnaSubasta(idCliente.GetValueOrDefault(), id, monto, DateTime.Now);
             return View();
         }
 
-        /*public IActionResult ProcesarAltaSubasta(double monto)
-        {
-            try
-            {
-                if (monto < 0) throw new Exception("El monto tiene que ser mayor a cero");
-                Subasta s = new Subasta(monto);
-                miSistema.AgregarOfertaAUnaSubasta(s);
-                ViewBag.Exito = $"La subasta se ingresó con exito";
-            }
-            catch(Exception ex) 
-            {
-                ViewBag.Error = ex.Message;
-            }
-            return View();  
-        }*/
-
-
-        public IActionResult DetalleArticulo()
-        {
-            ViewBag.detalleArticulo = miSistema.Articulos;
-            return View();  
-        }
+        
     }
 }

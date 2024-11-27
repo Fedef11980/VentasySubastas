@@ -20,21 +20,22 @@ namespace Web.Controllers
             ViewBag.cargarCliente = miSistema.ObtenerUsuarioPorId(id);
             return View();
         }
+
         [HttpGet]
-        public IActionResult CambiarSaldoBilletera()
+        public IActionResult CargarSaldoBilletera()
         {            
             return View();
         }
 
         [HttpPost]
-        public IActionResult CambiarSaldoBilletera(int idCliente, decimal nuevoSaldo)
+        public IActionResult CargarSaldoBilletera(decimal nuevoSaldo)
         {
             try
             {
                 if(nuevoSaldo < 0) throw new Exception("El monto no puede ser cero");
-                if (idCliente == null) throw new Exception("Cliente no encontrado");
-                miSistema.CargarSaldoEnBilletera(idCliente, nuevoSaldo);
-                ViewBag.Exito = $"Se cambio el saldo de la billetera del cleinte {idCliente}";
+                int? idCliente = HttpContext.Session.GetInt32("id");
+                miSistema.CargarSaldoEnBilletera(idCliente.GetValueOrDefault(), nuevoSaldo);
+                ViewBag.Exito = $"Se cambio el saldo de la billetera del cliente {idCliente}";
             }
             catch (Exception ex)
             {

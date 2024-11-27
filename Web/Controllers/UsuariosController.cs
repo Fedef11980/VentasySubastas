@@ -17,18 +17,18 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Login(string email, string pass)
         {
-
             try
             {
                 if (string.IsNullOrEmpty(email)) throw new Exception("Debe ingresar un email");
                 if (string.IsNullOrEmpty(pass)) throw new Exception("Debe ingresar una contraseña");
                 Usuario usuario = miSistema.Login(email, pass);
                 if (usuario == null) throw new Exception("Email o contraseña incorrectas");
-
                 ViewBag.Exito = $"Usuario Logueado{email}";
+
                 //Declaracion de variables de session
-                HttpContext.Session.SetString("email", email);
-                HttpContext.Session.SetString("rol", usuario.Rol());
+                HttpContext.Session.SetString ("email", email);
+                HttpContext.Session.SetInt32 ("id", usuario.Id);
+                HttpContext.Session.SetString ("rol", usuario.Rol());
 
                 return RedirectToAction("Index", "Home");
             }
@@ -37,7 +37,6 @@ namespace Web.Controllers
                 ViewBag.Error = ex.Message;
                 return View();
             }
-
         }
 
         public IActionResult Logout()

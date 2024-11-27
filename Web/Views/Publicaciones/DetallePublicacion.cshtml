@@ -41,11 +41,11 @@ else
     }
     else if (ViewBag.detallePublicacion is Subasta subasta)
     {
-        <form method="post" action="/publicaciones/ProcesarAltaSubasta">
+        <form method="post" action="/publicaciones/OfertaEnSubasta">
             <label>Monto</label>           
             <br />
             <br />
-            <input type="number" placeholder="Ingrese monto" name="monto"/>
+            <input type="number" placeholder="Ingrese monto" name="Monto"/>
             <br /> 
             <br />
             <input class ="btn btn-success" type="submit" value="Subastar"/>

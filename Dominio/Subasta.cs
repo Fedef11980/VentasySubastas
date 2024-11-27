@@ -41,7 +41,8 @@ namespace Dominio
         public override double CalcularPrecio()
         {
             if (_ofertas == null || _ofertas.Count == 0) return 0;
-            return _ofertas.Max(o => o.Monto);
+            Oferta ultimaOferta = _ofertas [_ofertas.Count - 1];
+            return ultimaOferta.Monto;
         }
 
         public override string TipoDePublicacion()

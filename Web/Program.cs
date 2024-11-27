@@ -31,6 +31,7 @@ namespace Web
 
             //PARA USAR VARIABLES DE SESSION: PONER ESTA LINEA ANTES DE app.Run();
             app.UseSession();
+
             app.Run();
         }
     }

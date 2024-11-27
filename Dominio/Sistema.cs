@@ -212,7 +212,7 @@ namespace Dominio
 
         public void PreCargarOfertas()
         {
-            AgregarOfertaAUnaSubasta(1, 1, 500, new DateTime(2023, 05, 11));
+            AgregarOfertaAUnaSubasta(1, 2, 500, new DateTime(2023, 05, 11));
             AgregarOfertaAUnaSubasta(2, 1, 600, new DateTime(2023, 06, 12));
         }
 
@@ -322,7 +322,7 @@ namespace Dominio
             return buscada;
         }
 
-        public Subasta ObternerSubastaPorId (int id)
+        public Subasta ObternerSubastaPorId(int id)
         {
             Subasta buscada = null;
             int i = 0;
@@ -377,7 +377,8 @@ namespace Dominio
             }
             return buscadas;
         }
-         public void AltaUsuario(Usuario usuario)
+         
+        public void AltaUsuario(Usuario usuario)
         {
             if (usuario == null) throw new Exception("el usuario no puede ser nulo");
             usuario.Validar();
