@@ -4,20 +4,15 @@
 }
 
 <h1>Detalle Publicación</h1>
-
 <br />
 <br />
-
 @if (ViewBag.detallePublicacion == null)
 {
     <div class="alert alert-danger">Publicación inexistente</div>
 }
 else
 {
-
     Publicacion p = ViewBag.detallePublicacion;
-
-
     <p><strong>Id: @p.Id</strong></p>
     <P><strong>Nombre: @p.Nombre</strong></P>
     <P><strong>Monto: @p.CalcularPrecio()</strong></P>
@@ -42,14 +37,16 @@ else
     else if (ViewBag.detallePublicacion is Subasta subasta)
     {
         <form method="post" action="/publicaciones/OfertaEnSubasta">
+            <input type="text" value="@ViewBag.detallePublicacion.Id" name="id" hidden />
             <label>Monto</label>           
             <br />
             <br />
-            <input type="number" placeholder="Ingrese monto" name="Monto"/>
+            <input type="number" placeholder="Ingrese monto" name="monto"/>
             <br /> 
             <br />
             <input class ="btn btn-success" type="submit" value="Subastar"/>
             <p><strong>Ingrese un precio mayor al último ingresado si va a subastar</strong></p>
+
         </form>
     }
     

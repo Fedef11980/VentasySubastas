@@ -36,7 +36,6 @@ namespace Web.Controllers
             return View();  
         }
 
-
         //Metodos para ver subastas con administrador
         public IActionResult AltaPublicacionVenta(int id) 
         {
@@ -44,13 +43,22 @@ namespace Web.Controllers
             return View();  
         }
 
-        [HttpGet]                
-        public IActionResult OfertaEnSubasta(int id, double monto) 
+        [HttpPost]
+        public IActionResult OfertaEnSubasta(int id, double monto)
         {
-            int? idCliente = HttpContext.Session.GetInt32("id");
-            miSistema.AgregarOfertaAUnaSubasta(idCliente.GetValueOrDefault(), id, monto, DateTime.Now);
-            return View();
+            try
+            {
+                if (monto < 0) throw new Exception("El monto no puede ser menor que cero");                
+                int? idCliente = HttpContext.Session.GetInt32("id");
+                miSistema.AgregarOfertaAUnaSubasta(idCliente.GetValueOrDefault(), id, monto, DateTime.Now);
+            }
+            catch (Exception ex)
+            { 
+                ViewBag.Error = ex.Message; 
+            }
+            return RedirectToAction("ListarPublicaciones");
         }
+        
 
         
     }
