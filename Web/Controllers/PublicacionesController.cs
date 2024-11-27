@@ -35,12 +35,12 @@ namespace Web.Controllers
             return View();  
         }
 
-        
-        public IActionResult AltaPublicacionVenta(int id) 
+        //Pantalla para ver venta hecha con exito
+        /*public IActionResult AltaPublicacionVenta(int id) 
         {
             ViewBag.altaPublicacionVenta = miSistema.ObternerVentaPorId(id);   
             return View();  
-        }
+        }*/
 
         [HttpPost]
         public IActionResult OfertaEnSubasta(int id, double monto)

@@ -346,6 +346,18 @@ namespace Dominio
             return ventaBuscada;
         }
 
+        public Publicacion ObtenerPublicacionPorId(int id)
+        {
+            Publicacion buscada = null;
+            int i = 0;
+            while (i < _publicaciones.Count && buscada == null)
+            {
+                if (_publicaciones[i].Id == id) buscada = _publicaciones[i];
+                i++;
+            }
+            return buscada;
+        }
+
         public void AgregarOfertaAUnaSubasta(int idCliente, int idSubasta, double monto, DateTime fecha)
         {
             Cliente clientebuscado = ObtenerUsuarioPorId(idCliente);
@@ -355,19 +367,7 @@ namespace Dominio
             Oferta ofertas = new Oferta(clientebuscado, monto, fecha);
             subastaBuscada.AgregarOferta(ofertas);
         }
-
-        public Publicacion ObtenerPublicacionPorId(int id)
-        {
-            Publicacion buscada = null;
-            int i = 0;
-            while(i<_publicaciones.Count && buscada == null)
-            {
-                if (_publicaciones[i].Id == id) buscada = _publicaciones[i];
-                i++;
-            }
-            return buscada;
-        }
-
+       
         public List<Publicacion> ObtenerPublicacionPorTipo(string tipoPublicacion)
         {
             List<Publicacion> buscadas = new List<Publicacion>();

@@ -18,7 +18,7 @@ namespace Dominio
         }
 
         // Constructor sin saldo (inicializa el saldo en 0)
-        public Cliente(string nombre, string apellido, string email, string contrasena)
+        public Cliente (string nombre, string apellido, string email, string contrasena)
             : base(nombre, apellido, email, contrasena)
         {
             _saldoDispBill = 0;
@@ -37,8 +37,7 @@ namespace Dominio
         }
 
         public override void Validar()
-        {
-            if (_saldoDispBill <= 0) throw new Exception("El saldo no puede ser negativo o menor que cero");
+        {           
             base.Validar();
         }
 

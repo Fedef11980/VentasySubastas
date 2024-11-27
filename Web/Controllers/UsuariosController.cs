@@ -66,7 +66,7 @@ namespace Web.Controllers
                 if (string.IsNullOrEmpty(email)) throw new Exception("El email no puede ser vacio");
                 if (contrasena.Length < 8) throw new Exception("la clave debe tener minimo 8 digitos");
 
-                Usuario c = new Cliente(nombre, apellido, email, contrasena);
+                Usuario c = new Cliente (nombre, apellido, email, contrasena);
                 miSistema.AltaUsuario(c);
                 ViewBag.Exito = $"Usuario cliente {nombre} dada de alta con exito";
             }
