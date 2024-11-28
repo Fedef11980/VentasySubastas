@@ -11,6 +11,5 @@ namespace Dominio
         ABIERTA = 1,
         CERRADA = 2,
         CANCELADA = 3
-
     }
 }

@@ -1,0 +1,33 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "CambiarSaldoBilletera";
+}
+
+<h1>Cargar Saldo en Billetera</h1>
+
+<br />
+@if (ViewBag.Error != null)
+
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+@if (ViewBag.Exito != null)
+
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+<br />
+<form method="post" action="/usuarios/CargarSaldoBilletera">
+    <div class="form-group">
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="form-label">Ingrese Monto</label>
+        <input type="number" class="form-control" placeholder="Ingrese un monto" name="nuevoSaldo" />
+    </div>
+    <br />
+    <div>
+        <input class="btn btn-primary" type="submit" value="Aceptar" />
+    </div>
+
+</form>

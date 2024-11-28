@@ -5,58 +5,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Dominio
 {
     public class Cliente : Usuario, IValidable
     {
-        private decimal _saldoDispBill;        
+        public decimal _saldo { get; set; }
 
-        public Cliente(string nombre, string apellido, string email, string contrasenia, decimal saldoDispBill):
-            base(nombre, apellido, email, contrasenia)
+        // Constructor que llama al constructor de la clase base (Usuario)
+        public Cliente(string nombre, string apellido, string email, string contrasena, decimal saldo)
+         : base(nombre, apellido, email, contrasena)
         {
-            _saldoDispBill = saldoDispBill;            
+            _saldo = saldo;
         }
 
         // Constructor sin saldo (inicializa el saldo en 0)
-        public Cliente (string nombre, string apellido, string email, string contrasena)
+        public Cliente(string nombre, string apellido, string email, string contrasena)
             : base(nombre, apellido, email, contrasena)
         {
-            _saldoDispBill = 0;
+            _saldo = 0;
         }
 
-        //Getter
-        public decimal SaldoDisponibleBilletera
-        {
-            get {  return _saldoDispBill; }
-            set { _saldoDispBill = value; }
-        }
-
-        public void AgregarSaldo (decimal nuevoSaldo)
+        public void AgregarSaldo(decimal nuevoSaldo)
         {
             if (nuevoSaldo < 0) throw new Exception("El saldo tiene que ser mayor que cero");
-            _saldoDispBill += nuevoSaldo;
+            _saldo += nuevoSaldo;
         }
 
-        public override void Validar()
-        {           
-            base.Validar();
+        public decimal Saldo 
+        { 
+            get { return _saldo; } 
+            set { _saldo = value; } 
         }
 
         public override string ToString()
-        {
-            return base.ToString() + $"Saldo: ${_saldoDispBill}"; 
+       {
+            return $"{Nombre}, Saldo: {_saldo}";
         }
 
-        public override bool Equals(object? obj)
+        public override void Validar()
         {
-            Cliente cl = obj as Cliente;
-            return cl != null && this._id == cl._id;
+            base.Validar();
+
         }
-        
+
         public override string Rol()
         {
             return "Cliente";
         }
-
     }
 }
+

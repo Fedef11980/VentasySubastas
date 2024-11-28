@@ -1,21 +1,17 @@
 ﻿using Dominio.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Oferta : IValidable
+    public class Oferta : IValidable, IComparable<Oferta>
     {
         private int _id;
         private static int s_ultId = 1;
-        private Cliente _cliente;            
+        private Cliente _cliente;
         private decimal _monto;
         private DateTime _fechaOferta;
 
-        public Oferta (Cliente cliente , decimal monto, DateTime fechaOferta)
+        public Oferta(Cliente cliente, decimal monto, DateTime fechaOferta)
         {
             _id = s_ultId;
             s_ultId++;
@@ -24,32 +20,43 @@ namespace Dominio
             _fechaOferta = fechaOferta;
         }
 
-        //Getters
-        public decimal Monto
-        {
-            get { return _monto; }
-        }
-
         public int Id
         {
             get { return _id; }
         }
 
-        public Cliente Clientes
+        public Cliente Cliente
         {
             get { return _cliente; }
         }
 
-        public void Validar()
+        public decimal Monto
         {
-            if (object.Equals(_cliente, null))
-            if (_monto < 0) throw new Exception("El monto debe ser mayor a cero");    
+            get { return _monto; }
         }
 
-        public override bool Equals(object? obj) // equals de oferta para dar de alta una oferta en subasta
+        public bool TieneCliente(Cliente cli)
         {
-            Oferta of = obj as Oferta;
-            return of != null && of._cliente.Equals(_cliente);
-        }        
-    }   
+            return _cliente.Equals(cli);
+        }
+
+        public void Validar()
+        {
+           if (_cliente == null) throw new Exception("El cliente no puede ser nulo.");
+           if (_monto < 0) throw new Exception("El monto debe ser mayor a 0.");
+        }
+
+        public string TipoPublicacion()
+        {
+            return "Oferta";
+        }
+
+        public int CompareTo(Oferta other)
+        {
+            if (other == null) return 1;
+
+            // Ordenar por monto descendente
+            return other.Monto.CompareTo(this.Monto);
+        }
+    }
 }

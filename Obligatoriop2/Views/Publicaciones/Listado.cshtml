@@ -1,0 +1,79 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "Listado";
+}
+
+<h1 class="text-center">Publicaciones</h1>
+
+<br />
+
+<!-- Mostrar mensaje de éxito o error -->
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["Mensaje"]
+    </div>
+}
+
+<br />
+<form class="row row-cols-lg-auto g-3 align-items-center" method="get" action="/publicaciones/BuscarPorPublicacion">
+    <div class="col-12">
+        <input class="form-control" type="text" placeholder="Tipo de publicacion" name="publicacion" />
+    </div>
+
+    <div class="col-12">
+        <input class="btn btn-success" type="submit" value="Buscar" />
+    </div>
+
+    <div class="col-12">
+        <a href="/publicaciones/listado" class="btn btn-secundary">Reiniciar</a>
+    </div>
+</form>
+<br />
+@if (ViewBag.Listado == null || ViewBag.Listado.Count == 0)
+{
+    <div class="alert alert-danger">No hay publicaciones de ese tipo en el sistema</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Publicación</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Publicacion p in ViewBag.Listado)
+            {
+                <tr>
+                    <td>@p.Nombre</td>
+                    <td>@p.Estado</td>
+                    <td>@p.TipoDePublicacion()</td>
+                    <td>@p.CalcularPrecio()</td>
+                    <td>
+                        @if (p.Estado == Estado.ABIERTA)
+                        {
+                            @if (p is Venta)
+                            {
+                                <!-- Botón para finalizar publicación (Comprar) -->
+                                <form method="post" action="/publicaciones/FinalizarPublicacion">
+                                    <input type="hidden" value="@p.Id" name="id" />
+                                    <button type="submit" class="btn btn-success">Comprar</button>
+                                </form>
+                            }
+                            else if (p is Subasta)
+                            {
+                                <!-- Botón para ofertar en subasta -->
+                            <td><a href="/publicaciones/detallePublicacion?Id=@p.Id">Detalle</a></td>
+                            }
+                        }
+                    </td>
+                </tr>            }
+        </tbody>
+    </table>
+}

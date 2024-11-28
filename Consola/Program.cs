@@ -1,6 +1,5 @@
 ﻿using Dominio;
 using System.Text.RegularExpressions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Consola
 {
@@ -28,9 +27,9 @@ namespace Consola
                         ListarArticulosPorCategoria();
                         break;
                     case "3":
-                        AltaArticulo();
+                        AltaArticulo(); 
                         break;
-                    case "4":
+                        case "4":
                         ListarPublicacionesEntreFechas();
                         break;
                     case "0":
@@ -48,15 +47,15 @@ namespace Consola
         static void MostrarMenu()
         {
             Console.Clear();
-            MostrarMensajeColor(ConsoleColor.Cyan, " **************** ");
-            MostrarMensajeColor(ConsoleColor.Cyan, "      MENU        ");
-            MostrarMensajeColor(ConsoleColor.Cyan, " **************** ");
+            MostrarMensajeColor(ConsoleColor.Cyan, "****************");
+            MostrarMensajeColor(ConsoleColor.Cyan, "      MENU      ");
+            MostrarMensajeColor(ConsoleColor.Cyan, "****************");
             Console.WriteLine();
-            Console.WriteLine("1 - Lista de Clientes");
-            Console.WriteLine("2 - Lista de Articulos por Categoria");
-            Console.WriteLine("3 - Alta Articulo"); 
-            Console.WriteLine("4 - Listado de Publicaciones dada 2 fechas");
-            Console.WriteLine();
+            Console.WriteLine("1 - Listar Clientes");
+            Console.WriteLine("2 - Listado de Articulos por Categoria");
+            Console.WriteLine("3 - Alta Articulo");
+            Console.WriteLine("4 - Listado de Publicaciones dada 2 fechas"); //MENU CONSOLA
+
             Console.WriteLine("0 - Salir");
         }
 
@@ -82,6 +81,7 @@ namespace Consola
                     MostrarError("ERROR: Debe ingresar solo numeros");
                 }
             }
+
             return valorConvertido;
         }
 
@@ -92,7 +92,7 @@ namespace Consola
 
             while (!exito)
             {
-                Console.Write($"{mensaje}");
+                Console.Write($"{mensaje} [dd/MM/yyyy]:");
                 exito = DateTime.TryParse(Console.ReadLine(), out fecha);
 
                 if (!exito)
@@ -100,6 +100,7 @@ namespace Consola
                     MostrarError("ERROR: La fecha no respeta el formato dd/MM/yyyy");
                 }
             }
+
             return fecha;
         }
 
@@ -118,6 +119,7 @@ namespace Consola
                     MostrarError("ERROR: Debe ingresar solo numeros");
                 }
             }
+
             return valorConvertido;
         }
 
@@ -165,51 +167,75 @@ namespace Consola
 
             PressToContinue();
         }
-
-        static void ListarClientes() 
+        static void ListarClientes()
         {
             Console.Clear();
-            MostrarMensajeColor(ConsoleColor.Yellow, "Listar de Clientes");
+            MostrarMensajeColor(ConsoleColor.Yellow, "Lista de Clientes");
             Console.WriteLine();
 
-            List<Cliente> todosLosClientes = miSistema.ListarClientes();
+            try
+            {
+                // Obtener la lista de clientes desde el sistema
+                List<Cliente> todosLosClientes = miSistema.ListarClientes();
 
-            if (todosLosClientes.Count == 0)
-            {
-                MostrarError("No existen Clientes en el sistema");                                
-            }
-            else
-            {
-                foreach (Cliente cliente in todosLosClientes)
+                // Verificar si la lista está vacía
+                if (todosLosClientes == null || todosLosClientes.Count == 0)
                 {
-                    Console.WriteLine(cliente);
+                    MostrarError("No existen Clientes en el sistema.");
+                }
+                else
+                {
+                    // Mostrar los clientes en formato limpio
+                    foreach (Cliente cliente in todosLosClientes)
+                    {
+                        Console.WriteLine(cliente.ToString());  // Asume que tienes un método ToString en Cliente
+                    }
                 }
             }
-            PressToContinue();
+            catch (Exception ex)
+            {
+                MostrarError($"Error al listar los clientes: {ex.Message}");
+            }
+
+            PressToContinue();  // Esperar para continuar
         }
+
+
 
         static void ListarArticulosPorCategoria()
         {
             Console.Clear();
-            MostrarMensajeColor(ConsoleColor.Yellow, "Lista de Articulos por Categoria");
+            MostrarMensajeColor(ConsoleColor.Yellow, "Lista de Artículos por Categoría");
             Console.WriteLine();
 
-            string categoriaBuscada = PedirPalabras("Ingrese la categoría: ");
-            List<Articulo> articulosFiltrados = miSistema.ListarArticulosPorCategoria(categoriaBuscada);
+            try
+            {
+                // Pedir la categoría al usuario
+                string categoriaBuscada = PedirPalabras("Ingrese la categoría: ");
 
-            if (articulosFiltrados.Count == 0)
-            {
-                MostrarError($"No hay artículos en la categoría '{categoriaBuscada}'.");
-            }
-            else
-            {
-                foreach (Articulo articulo in articulosFiltrados)
+                // Obtener artículos filtrados por categoría
+                List<Articulo> articulosFiltrados = miSistema.ListarArticulosPorCategoria(categoriaBuscada);
+
+                // Verificar si no hay artículos en la categoría buscada
+                if (articulosFiltrados == null || articulosFiltrados.Count == 0)
                 {
-                    Console.WriteLine(articulo);
+                    MostrarError($"No hay artículos en la categoría '{categoriaBuscada}'.");
+                }
+                else
+                {
+                    // Mostrar los artículos filtrados
+                    foreach (Articulo articulo in articulosFiltrados)
+                    {
+                        Console.WriteLine(articulo.ToString());  // Asume que tienes un método ToString en Articulo
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MostrarError($"Error al listar los artículos por categoría: {ex.Message}");
+            }
 
-            PressToContinue();
+            PressToContinue();  // Esperar para continuar
         }
 
         static void AltaArticulo()
@@ -224,9 +250,20 @@ namespace Consola
 
             try
             {
-                if (string.IsNullOrEmpty(nombre)) throw new Exception("El nombre no puede estar vacío.");
-                if (string.IsNullOrEmpty(categoria)) throw new Exception("La categoría no puede estar vacía.");
-                if (precio <= 0) throw new Exception("El precio debe ser mayor a cero.");
+                if (string.IsNullOrWhiteSpace(nombre)) // Valida si el nombre está vacío o es solo espacios
+                {
+                    throw new Exception("El nombre no puede estar vacío.");
+                }
+
+                if (string.IsNullOrWhiteSpace(categoria)) // Valida si la categoría está vacía o es solo espacios
+                {
+                    throw new Exception("La categoría no puede estar vacía.");
+                }
+
+                if (precio <= 0) // Valida que el precio sea mayor que cero
+                {
+                    throw new Exception("El precio debe ser mayor a cero.");
+                }
 
                 miSistema.AltaArticulo(new Articulo(nombre, categoria, precio));
                 MostrarExito("Artículo registrado exitosamente.");
@@ -234,10 +271,9 @@ namespace Consola
             catch (Exception ex)
             {
                 MostrarError($"Error: {ex.Message}");
-            }             
-            PressToContinue();
+            }
 
-            
+            PressToContinue();
         }
 
         static void ListarPublicacionesEntreFechas()
@@ -246,8 +282,8 @@ namespace Consola
             MostrarMensajeColor(ConsoleColor.Yellow, "Listar Publicaciones entre Fechas");
             Console.WriteLine();
 
-            DateTime fecha1 = PedirFecha("Ingrese la primera fecha (dd/mm/yyyy):");
-            DateTime fecha2 = PedirFecha("Ingrese la segunda fecha (dd/mm/yyyy):");
+            DateTime fecha1 = PedirFecha("Ingrese la primera fecha: ");
+            DateTime fecha2 = PedirFecha("Ingrese la segunda fecha: ");
 
             try
             {
@@ -266,8 +302,16 @@ namespace Consola
             {
                 MostrarError(ex.Message);
             }
+
             PressToContinue();
         }
+
+
+
+      
+        
+
+
         #endregion
     }
 }

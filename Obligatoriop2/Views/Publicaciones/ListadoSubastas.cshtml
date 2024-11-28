@@ -1,0 +1,51 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "Listado de Subastas";
+}
+
+<h1>Listado de Subastas</h1>
+
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+
+@if (ViewBag.Subastas == null || ViewBag.Subastas.Count == 0)
+{
+    <div class="alert alert-danger">No hay subastas en el sistema.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Publicacion subasta in ViewBag.Subastas)
+            {
+                <tr>
+                    <td>@subasta.Nombre</td>
+                    <td>@subasta.FechaPublic.ToShortDateString()</td>
+                    <td>@subasta.Estado</td>
+                    <td>@subasta.CalcularPrecio()</td>
+                    <td>
+                        @if (subasta.Estado == Estado.ABIERTA)
+                        {
+                            <form method="post" action="/Publicaciones/CerrarSubasta">
+                                <input type="hidden" name="id" value="@subasta.Id" />
+                                <button type="submit" class="btn btn-danger">Cerrar Subasta</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

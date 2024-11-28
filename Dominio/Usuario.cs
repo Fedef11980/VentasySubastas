@@ -4,72 +4,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dominio
 {
     public abstract class Usuario : IValidable
     {
-        protected int _id;
-        protected static int s_ultId = 1;
-        protected string _nombre;
-        protected string _apellido;
-        protected string _email;
-        protected string _contrasena;
+        private int id;
+        private static int s_ultId = 1;
+        private string _nombre;
+        private string _apellido;
+        private string _email;
+        private string _contrasena;
         
-        public Usuario(string nombre, string apellido, string email, string contrasena)
+
+        protected Usuario( string nombre, string apellido, string email, string contrasena)
         {
-            _id = s_ultId;
+            id = s_ultId;
             s_ultId++;
             _nombre = nombre;
             _apellido = apellido;
             _email = email;
             _contrasena = contrasena;
-
-        }
-        
-
-        //Getters
-        public int Id
-        {
-            get { return _id; }
         }
 
         public string Nombre
         {
             get { return _nombre; }
+            set { _nombre = value; }
         }
 
         public string Apellido
         {
             get { return _apellido; }
-        }      
-
-        public string Email 
-        { 
-            get { return _email; } 
+            set { _apellido = value; }
         }
 
-        public string Contrasena 
-        { 
-            get { return _contrasena; } 
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
         }
 
+        public string Contrasena
+        {
+            get { return _contrasena; }
+            set { _contrasena = value; }
+        }
+
+        public int Id
+        { 
+            get { return id; } 
+        }  
+        
         public virtual void Validar()
         {
-            if (string.IsNullOrEmpty(_nombre)) throw new Exception("El nombre no puede ser vacio");
-            if (string.IsNullOrEmpty(_apellido)) throw new Exception("El nombre no puede ser vacio");
-            if (string.IsNullOrEmpty(_contrasena)) throw new Exception("La contraseña  no puede ser vacio");            
-            if (string.IsNullOrEmpty(_email)) throw new Exception("El email no puede ser vacio");
-        }
+            if (string.IsNullOrEmpty(_nombre)) throw new ArgumentNullException("El nombre no puede ser vacio");
+            if (string.IsNullOrEmpty(_apellido)) throw new ArgumentNullException("El apellido no puede ser vacio");
+            if (string.IsNullOrEmpty(Contrasena)) throw new Exception("La contraseña no puede estar vacia");
 
-        public override string ToString()
-        {
-            return $"Nombre:{_nombre} - Apellido:{_apellido} - ";
+            if (string.IsNullOrEmpty(_email)) throw new ArgumentNullException("El emial no puede ser vacio");
         }
 
         public abstract string Rol();
-
-
     }
 }
