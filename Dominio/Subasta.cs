@@ -11,15 +11,6 @@ namespace Dominio
         private Cliente _cliente;
         private Administrador _usuario;
 
-        // Constructor de la clase Subasta
-        public Subasta(string nombre, DateTime fechaPublicacion, DateTime fechaFinalizacion, Cliente cliente, List<Articulo> articulos, Estado estado, decimal precioFinal, Administrador admin, List<Oferta> ofertas)
-       : base(nombre, fechaPublicacion, fechaFinalizacion, cliente, articulos, estado)
-        {
-            _precioFinal = precioFinal;
-            _usuario = admin;
-            _ofertas = ofertas ?? new List<Oferta>();
-        }
-
         //Propiedades solo de lectura para acceder a los atributos
         public List<Oferta> Ofertas
         {
@@ -41,7 +32,16 @@ namespace Dominio
             get { return _usuario; }
         }
 
-        public decimal Precio { get; set; }
+        // Constructor de la clase Subasta
+        public Subasta(string nombre, DateTime fechaPublicacion, DateTime fechaFinalizacion, Cliente cliente, List<Articulo> articulos, Estado estado, decimal precioFinal, Administrador admin, List<Oferta> ofertas)
+       : base(nombre, fechaPublicacion, fechaFinalizacion, cliente, articulos, estado)
+        {
+            _precioFinal = precioFinal;
+            _usuario = admin;
+            _ofertas = ofertas ?? new List<Oferta>();  
+        }
+
+  
 
         public void AgregarOferta(Oferta nuevaOferta) 
         {
@@ -78,7 +78,8 @@ namespace Dominio
             _precioFinal = nuevaOferta.Monto;
 
         }
-        
+
+
         //oferta mayor y cliente que no haya otra oferta
 
         // Método ToString para faciilitar la visualización
@@ -86,7 +87,6 @@ namespace Dominio
         {
             return $"Subasta: {Nombre}, Precio Final: {_precioFinal}, Ofertas: {Ofertas.Count}";
         }
-
         public override void Validar()
         {
             base.Validar();
@@ -102,8 +102,12 @@ namespace Dominio
         public override string TipoDePublicacion()
         {
             return "Subasta";
-        }     
-        
+        }
+
+     
+
+        public decimal Precio { get; set; } 
+
         public int CompareTo(Subasta other)
         {
             if (other == null) return 1;
@@ -111,7 +115,6 @@ namespace Dominio
             // Ordenar de mayor a menor precio
             return other.FechaPublic.CompareTo(this.FechaPublic);
         }
-
         public List<Oferta> ObtenerOfertas()
         {
             // Crear una nueva lista para no modificar la lista original
@@ -129,11 +132,14 @@ namespace Dominio
                     ofertasOrdenadas[j + 1] = ofertasOrdenadas[j];
                     j--;
                 }
+
                 // Insertar la oferta actual en su posición ordenada
                 ofertasOrdenadas[j + 1] = ofertaActual;
             }
+
             return ofertasOrdenadas;
         }
+
 
         public override void FinalizarPublicacion(Publicacion p, Usuario usuarioFinal, DateTime fechaFinalizacion)
         {
@@ -170,7 +176,6 @@ namespace Dominio
                 }
                 i++;
             }
-            if (comprador.Saldo < precioFinal) throw new Exception("Saldo insuficiente para realziar la compra");
             
             // Si no se encontró un comprador válido
             if (comprador == null)
@@ -184,17 +189,22 @@ namespace Dominio
                 else
                 {
                     throw new Exception("No se encontró un comprador con saldo suficiente.");
-                }               
+                }
+
+               
                 {
                     throw new Exception("Saldo insuficiente para realizar la compra");
                 }
             }
+
             // Realizar la transacción
             comprador.Saldo -= precioFinal;
             p.Estado = Estado.CERRADA;
             p.UsuarioFinaliza = usuarioFinal;
             p.FechaFinaliz = fechaFinalizacion;
         }
+
+
     }
 }
 

@@ -32,22 +32,20 @@ namespace Dominio
         }
 
 
-        public Estado Estado 
-        { 
-            get { return _estado; } 
-            set { _estado = value; } 
-        }
+        public Estado Estado { get { return _estado; } set { _estado = value; } }
+
 
         public int Id
-        { 
-            get { return _id; } 
-        }
+            { get { return _id; } }
 
-        public Usuario UsuarioFinaliza 
-        { 
-            get { return _usuarioFinaliza; } 
-            set { _usuarioFinaliza = value; } 
-        }
+
+        public Usuario UsuarioFinaliza { get { return _usuarioFinaliza; } set { _usuarioFinaliza = value; } }
+
+        //public decimal PrecioFinal
+        //{
+        //    get { return _precioFinal; }
+        //    set { _precioFinal = value; }
+        //}
 
         public string Nombre
         {
@@ -55,47 +53,42 @@ namespace Dominio
         }
 
         public List<Articulo> Articulos
-        { 
-            get { return _articulos; } 
-        }
+        { get { return _articulos; } }
 
         public DateTime FechaPublic
         {
             get { return _fechaPublic; }
         }
 
-        public DateTime FechaFinaliz 
-        { 
-            get { return _fechaFinaliz; } 
-            set { _fechaFinaliz = value; } 
-        }
-
+        public DateTime FechaFinaliz { get { return _fechaFinaliz; } set { _fechaFinaliz = value; } }
         public virtual void Validar()
         {
-            if (string.IsNullOrEmpty(_nombre)) throw new ArgumentNullException("El nombre no puede ser vacio");
+            if (string.IsNullOrEmpty(_nombre)) 
+                throw new ArgumentNullException("El nombre no puede ser vacio");
 
-            if (_fechaFinaliz <= _fechaPublic) throw new Exception ("La fecha de finalización debe ser posterior a la fecha de publicación."); //VALIDACIONES BASICAS.
+            if (_fechaFinaliz <= _fechaPublic)
+                throw new Exception ("La fecha de finalización debe ser posterior a la fecha de publicación."); //VALIDACIONES BASICAS.
+
+         
         }
-
-        public override string ToString()
-        {
-            return $"Publicación: Id: {_id}Nombre: {_nombre},  Estado: {_estado}, Artículos: {Articulos.Count} Precio: {CalcularPrecio}";
-        }
-
-        public void AgregarOferta(Oferta oferta)
+        public void AgregarOferta( Oferta oferta)
         {
 
-        }
-               
-        public void AgregarArticulo(Articulo articulo)
-        {           
-            //validarr
-            _articulos.Add(articulo);
         }
 
         public abstract string TipoDePublicacion();
 
         public abstract decimal CalcularPrecio();
+        public override string ToString()
+        {
+           return $"Publicación: Id: {_id}Nombre: {_nombre},  Estado: {_estado}, Artículos: {Articulos.Count} Precio: {CalcularPrecio}";
+        }
+        public void AgregarArticulo(Articulo articulo)
+        {
+           
+            //validarr
+            _articulos.Add(articulo);
+        }
 
         public abstract void FinalizarPublicacion(Publicacion p, Usuario usuarioFinal, DateTime fechaFinalizacion);
 

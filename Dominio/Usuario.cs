@@ -27,11 +27,13 @@ namespace Dominio
             _contrasena = contrasena;
         }
 
+
         public string Nombre
         {
             get { return _nombre; }
             set { _nombre = value; }
         }
+
 
         public string Apellido
         {
@@ -51,11 +53,16 @@ namespace Dominio
             set { _contrasena = value; }
         }
 
+
+
         public int Id
-        { 
-            get { return id; } 
-        }  
+            { get { return id; } }  
+
+
+
         
+
+
         public virtual void Validar()
         {
             if (string.IsNullOrEmpty(_nombre)) throw new ArgumentNullException("El nombre no puede ser vacio");

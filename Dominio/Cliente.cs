@@ -26,23 +26,22 @@ namespace Dominio
             _saldo = 0;
         }
 
+
+
+
+
         public void AgregarSaldo(decimal nuevoSaldo)
         {
             if (nuevoSaldo < 0) throw new Exception("El saldo tiene que ser mayor que cero");
             _saldo += nuevoSaldo;
         }
 
-        public decimal Saldo 
-        { 
-            get { return _saldo; } 
-            set { _saldo = value; } 
-        }
+        public decimal Saldo { get { return _saldo; } set { _saldo = value; } }
 
         public override string ToString()
        {
             return $"{Nombre}, Saldo: {_saldo}";
         }
-
         public override void Validar()
         {
             base.Validar();

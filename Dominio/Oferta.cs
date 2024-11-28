@@ -7,6 +7,7 @@ namespace Dominio
     {
         private int _id;
         private static int s_ultId = 1;
+
         private Cliente _cliente;
         private decimal _monto;
         private DateTime _fechaOferta;
@@ -42,15 +43,15 @@ namespace Dominio
 
         public void Validar()
         {
-           if (_cliente == null) throw new Exception("El cliente no puede ser nulo.");
-           if (_monto < 0) throw new Exception("El monto debe ser mayor a 0.");
+            if (_cliente == null)
+                throw new Exception("El cliente no puede ser nulo.");
+            if (_monto < 0)
+                throw new Exception("El monto debe ser mayor a 0.");
         }
-
         public string TipoPublicacion()
         {
             return "Oferta";
         }
-
         public int CompareTo(Oferta other)
         {
             if (other == null) return 1;

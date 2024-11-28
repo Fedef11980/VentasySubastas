@@ -17,6 +17,10 @@ namespace Dominio.Controllers
         [HttpGet]
         public IActionResult Listado()
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
             ViewBag.Listado = miSistema.Publicaciones;
             if (TempData["Exito"] != null) ViewBag.Exito = TempData["Exito"];
             return View();
@@ -25,6 +29,11 @@ namespace Dominio.Controllers
         [HttpGet]
         public IActionResult ListadoSubastas()
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
+
             ViewBag.Subastas = miSistema.ListadoSubastas();
 
             if (TempData["Exito"] != null) ViewBag.Exito = TempData["Exito"];
@@ -33,6 +42,10 @@ namespace Dominio.Controllers
 
         public IActionResult DetallePublicacion(int id)
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
             ViewBag.detallePublicacion = miSistema.ObtenerPublicacionPorId(id);
             return View();
         }
@@ -55,6 +68,10 @@ namespace Dominio.Controllers
         [HttpPost]
         public IActionResult FinalizarPublicacion(int id)
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
             try
             {
                 // Obtener la publicación
@@ -69,7 +86,7 @@ namespace Dominio.Controllers
                 publicacion.FinalizarPublicacion(publicacion, usuarioActual, DateTime.Now);
 
                 // Mensaje de éxito
-                TempData["Mensaje"] = $"La publicación '{publicacion.Nombre}' fue finalizada exitosamente.";
+                TempData["Mensaje"] = $"La publicación '{publicacion.Nombre}' fue comprada exitosamente.";
             }
             catch (Exception ex)
             {
@@ -82,6 +99,10 @@ namespace Dominio.Controllers
         [HttpPost]
         public IActionResult CerrarSubasta(int id)
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
             try
             {
                 // Verificar que el usuario actual es un administrador
@@ -114,6 +135,10 @@ namespace Dominio.Controllers
 
         public IActionResult AltaPublicacionVenta(int id)
         {
+            if (HttpContext.Session.GetString("rol") == null || HttpContext.Session.GetString("rol") != "Admin")
+            {
+                return View("NoAutorizado");
+            }
             ViewBag.altaPublicacionVenta = miSistema.ObtenerPublicacionPorId(id);
             return View();
         }
@@ -121,6 +146,10 @@ namespace Dominio.Controllers
         [HttpPost]
         public IActionResult OfertaEnSubasta(int id, decimal monto)
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
             try
             {   
                 int? idCliente = HttpContext.Session.GetInt32("id");
@@ -138,6 +167,10 @@ namespace Dominio.Controllers
         //Metodos para ver subastas con administrador
         public IActionResult ListarSubastas()
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
             return View();
         }
     }

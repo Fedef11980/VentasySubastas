@@ -23,11 +23,13 @@ namespace Dominio
             _categoria = categoria;
             _precio = precio;
         }
-       
         public string Categoria
         {
             get { return _categoria; }
+
         }
+
+
 
         public decimal Precio
         {
@@ -40,7 +42,6 @@ namespace Dominio
             get { return _id; }
 
         }
-
         public void Validar()
         {
             if (string.IsNullOrEmpty(_nombre)) throw new ArgumentNullException("El nombre no puede estar vacio");
@@ -49,7 +50,6 @@ namespace Dominio
 
 
         }
-
         public override string ToString()
         {
             return $"Nombre: {_nombre}, Categoría: {_categoria}, Precio: {_precio}";

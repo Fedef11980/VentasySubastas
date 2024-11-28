@@ -86,6 +86,10 @@ namespace Obligatoriop2.Controllers
         [HttpGet]
         public IActionResult CargarSaldoBilletera()
         {
+            if (HttpContext.Session.GetString("rol") == null)
+            {
+                return View("NoAutorizado");
+            }
             return View();
         }
 

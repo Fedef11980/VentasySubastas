@@ -20,12 +20,10 @@ namespace Dominio
         {
             return $"{Nombre}"; // CORREGIR
         }
-       
         public override void Validar()
         {
             base.Validar();
         }
-        
         public override string Rol()
         {
             return "Admin";

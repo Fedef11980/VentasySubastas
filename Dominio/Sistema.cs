@@ -192,7 +192,7 @@ namespace Dominio
             AltaPublicacion(new Venta("Electrodomesticos", new DateTime(2024, 10, 12), new DateTime(2024, 12, 12), (Cliente)ObtenerUsuarioPorId(2), listaArticulos1, Estado.ABIERTA, false));
             AltaPublicacion(new Venta("Juegos recreativos", new DateTime(2024, 11, 01), new DateTime(2024, 12, 25), cliente1, listaArticulos4, Estado.ABIERTA, false));
             AltaPublicacion(new Venta("Ropa antigua", new DateTime(2024, 09, 15), new DateTime(2024, 11, 30), (Cliente)ObtenerUsuarioPorId(3), listaArticulos8, Estado.ABIERTA, false));
-            AltaPublicacion(new Venta("Ludos retro", new DateTime(2024, 08, 20), new DateTime(2024, 10, 20), cliente1, listaArticulos1, Estado.ABIERTA, false));
+            AltaPublicacion(new Venta("Ludos retro", new DateTime(2024, 08, 20), new DateTime(2024, 10, 20), cliente1, listaArticulos8, Estado.ABIERTA, false));
             AltaPublicacion(new Venta("Gamer pc y mas", new DateTime(2024, 12, 01), new DateTime(2025, 01, 01), (Cliente)ObtenerUsuarioPorId(4), listaArticulos5, Estado.ABIERTA, false));
             AltaPublicacion(new Venta("Jueto de baño", new DateTime(2024, 07, 10), new DateTime(2024, 09, 10), cliente1, listaArticulos6, Estado.ABIERTA, false));
             AltaPublicacion(new Venta("Juego de pesas", new DateTime(2024, 06, 05), new DateTime(2024, 08, 05), (Cliente)ObtenerUsuarioPorId(5), listaArticulos1, Estado.ABIERTA, false));
