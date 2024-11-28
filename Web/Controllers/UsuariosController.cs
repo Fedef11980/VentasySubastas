@@ -28,6 +28,7 @@ namespace Web.Controllers
                 //Declaracion de variables de session
                 HttpContext.Session.SetString ("email", email);
                 HttpContext.Session.SetInt32 ("id", usuario.Id);
+                HttpContext.Session.SetString("nombre", usuario.Nombre);
                 HttpContext.Session.SetString ("rol", usuario.Rol());
 
                 return RedirectToAction("Index", "Home");

@@ -29,13 +29,25 @@ else
     <br />
     @if (ViewBag.detallePublicacion is Venta venta)
     {
+        @if (p is Venta)
+        {
+            <!-- Botón para finalizar publicación (Comprar) -->
+            <form method="post" action="/publicaciones/FinalizarPublicacion">
+                 <input type="hidden" value="@p.Id" name="id" />
+                 <button type="submit" class="btn btn-success">Comprar</button>
+            </form>
+        }
+        
+       
         <form>
             <label>Haga click en el botón para comprar</label><br /><br />
             <input class="btn btn-success" type="submit" value="Comprar"/>
+           
         </form>
     }
     else if (ViewBag.detallePublicacion is Subasta subasta)
     {
+        
         <form method="post" action="/publicaciones/OfertaEnSubasta">
             <input type="text" value="@ViewBag.detallePublicacion.Id" name="id" hidden />
             <label>Monto</label>           
@@ -49,6 +61,6 @@ else
 
         </form>
     }
-    
+
 
 }

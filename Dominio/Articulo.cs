@@ -14,9 +14,9 @@ namespace Dominio
         private static int s_ultId = 1;
         private string _nombre;
         private string _categoria;
-        private double _precio;
+        private decimal _precio;
 
-        public Articulo( string nombre, string categoria, double precio)
+        public Articulo( string nombre, string categoria, decimal precio)
         {
             _id = s_ultId;
             s_ultId++;
@@ -41,7 +41,7 @@ namespace Dominio
             get { return _categoria; }
         }
 
-        public double Precio
+        public decimal Precio
         {
             get { return _precio; } 
         }
@@ -63,7 +63,5 @@ namespace Dominio
             Articulo articulos = obj as Articulo;
             return articulos != null && this._id == articulos._id;
         }
-
     }
-
 }

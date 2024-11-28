@@ -12,10 +12,10 @@ namespace Dominio
         private int _id;
         private static int s_ultId = 1;
         private Cliente _cliente;            
-        private double _monto;
+        private decimal _monto;
         private DateTime _fechaOferta;
 
-        public Oferta (Cliente cliente , double monto, DateTime fechaOferta)
+        public Oferta (Cliente cliente , decimal monto, DateTime fechaOferta)
         {
             _id = s_ultId;
             s_ultId++;
@@ -24,20 +24,8 @@ namespace Dominio
             _fechaOferta = fechaOferta;
         }
 
-        public void Validar()
-        {
-            if (object.Equals(_cliente, null))
-            if (_monto < 0) throw new Exception("El monto debe ser mayor a cero");    
-        }
-
-
-        public override bool Equals(object? obj) // equals de oferta para dar de alta una oferta en subasta
-        {
-            Oferta of = obj as Oferta;
-            return of != null && of._cliente.Equals(_cliente);
-        }
-
-        public double Monto
+        //Getters
+        public decimal Monto
         {
             get { return _monto; }
         }
@@ -46,7 +34,22 @@ namespace Dominio
         {
             get { return _id; }
         }
-    }
 
-   
+        public Cliente Clientes
+        {
+            get { return _cliente; }
+        }
+
+        public void Validar()
+        {
+            if (object.Equals(_cliente, null))
+            if (_monto < 0) throw new Exception("El monto debe ser mayor a cero");    
+        }
+
+        public override bool Equals(object? obj) // equals de oferta para dar de alta una oferta en subasta
+        {
+            Oferta of = obj as Oferta;
+            return of != null && of._cliente.Equals(_cliente);
+        }        
+    }   
 }

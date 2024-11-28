@@ -27,7 +27,8 @@ namespace Dominio
         //Getter
         public decimal SaldoDisponibleBilletera
         {
-            get {  return _saldoDispBill; }            
+            get {  return _saldoDispBill; }
+            set { _saldoDispBill = value; }
         }
 
         public void AgregarSaldo (decimal nuevoSaldo)

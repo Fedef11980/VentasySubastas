@@ -18,8 +18,7 @@ namespace Dominio
             PrecargarArticulos();
             PrecargarPublicaciones();
             PrecargarUsuarios();
-            PreCargarOfertas();
-            PrecargarArticulosPublicaciones();
+            PreCargarOfertas();            
         }
 
         //Singleton
@@ -105,7 +104,7 @@ namespace Dominio
         //revisar con Marcio
         private void PrecargarPublicaciones()
         {   //Subastas
-            AltaPublicacion(new Subasta("Vacaciones en la Playa", new DateTime(2023, 05, 11), new DateTime(2023, 06, 11), Estado.ABIERTA)); 
+            AltaPublicacion(new Subasta("Vacaciones en la Playa", new DateTime(2023, 05, 11), new DateTime(2023, 06, 11), ObtenerUsuarioPorId(3),new List<Articulo>(), Estado.ABIERTA, 0, Administrador , new List<Oferta>())); 
             AltaPublicacion(new Subasta("Paseo en Bicicleta", new DateTime(2023, 05, 11), new DateTime(2023, 06, 11), Estado.ABIERTA));
             AltaPublicacion(new Subasta("Juego de Tenis", new DateTime(2023, 02, 20), new DateTime(2023, 03, 20), Estado.ABIERTA));
             AltaPublicacion(new Subasta("Set de Tecnología", new DateTime(2023, 04, 01), new DateTime(2023, 05, 01), Estado.ABIERTA));
@@ -125,7 +124,7 @@ namespace Dominio
             AltaPublicacion(new Venta("Jugando con la Tablet", new DateTime(2023, 10, 01), new DateTime(2023, 11, 01), Estado.ABIERTA, false));
             AltaPublicacion(new Venta("Cámara Fotográfica", new DateTime(2023, 11, 05), new DateTime(2023, 12, 05), Estado.ABIERTA, true));  // Oferta relámpago
             AltaPublicacion(new Venta("Silla de Oficina", new DateTime(2023, 12, 01), new DateTime(2024, 01, 01), Estado.ABIERTA, false));
-            AltaPublicacion(new Venta("Zapatillas Deportivas", new DateTime(2023, 10, 10), new DateTime(2023, 11, 10), Estado.ABIERTA, true));  // Oferta relámpago
+            AltaPublicacion(new Venta("Zapatillas Deportivas", new DateTime(2023, 10, 10), new DateTime(2023, 11, 10), Estado.ABIERTA, true));  // Oferta relámpago*/
         }
 
         private void PrecargarArticulosPublicaciones()
@@ -206,11 +205,11 @@ namespace Dominio
             AltaUsuario(new Cliente("Lucía", "Hernández", "lucia@example.com", "passLucia",980));
             AltaUsuario(new Cliente("Javier", "Ramírez", "javier@example.com", "passJavier",1000));
             AltaUsuario(new Cliente("Valentina", "Ruiz", "valentina@example.com", "passValentina",1100));
-            AltaUsuario(new Administrador("Marcio", "Huertas", "marcio@example.com", "marcio"));
-            AltaUsuario(new Administrador("Federico", "Gallo", "federico@example.com", "fede"));
+            AltaUsuario(new Administrador("Marcio", "Huertas", "marcio@example.com", "marcio123"));
+            AltaUsuario(new Administrador("Federico", "Gallo", "federico@example.com", "fede1234"));
         }
 
-        public void PreCargarOfertas()
+        public void PreCargarOfertas() //funcion nueva
         {
             AgregarOfertaAUnaSubasta(1, 2, 500, new DateTime(2023, 05, 11));
             AgregarOfertaAUnaSubasta(2, 1, 600, new DateTime(2023, 06, 12));
@@ -321,7 +320,7 @@ namespace Dominio
             }
             return buscada;
         }
-
+          
         public Subasta ObternerSubastaPorId(int id)
         {
             Subasta buscada = null;
@@ -358,12 +357,13 @@ namespace Dominio
             return buscada;
         }
 
-        public void AgregarOfertaAUnaSubasta(int idCliente, int idSubasta, double monto, DateTime fecha)
+        public void AgregarOfertaAUnaSubasta(int idCliente, int idSubasta, decimal monto, DateTime fecha)
         {
             Cliente clientebuscado = ObtenerUsuarioPorId(idCliente);
             Subasta subastaBuscada = ObternerSubastaPorId(idSubasta);
             if (clientebuscado == null) throw new Exception ("El id del ususario no existe");
             if (subastaBuscada == null) throw new Exception ("El id de la subasta no existe");
+            if (subastaBuscada.Estado != Estado.ABIERTA) throw new Exception("La subasta no está abierta para recibir ofertas.");            
             Oferta ofertas = new Oferta(clientebuscado, monto, fecha);
             subastaBuscada.AgregarOferta(ofertas);
         }
@@ -409,18 +409,7 @@ namespace Dominio
             }
             return usuarioBuscado;
         }
-
-        /*public List<Articulo> VerArticulo()
-        {
-            List<Articulo> buscado = new List<Articulo();
-
-            foreach (Publicacion p in ViewBag.detallePublicacion)
-            {
-                if (p.Articulos == ViewBag.detallePublicacion) buscado.Add(p);
-            }
-            return buscado;
-        }*/
-
+      
         public void CargarSaldoEnBilletera(int idCliente, decimal nuevoSaldo)
         {
             Cliente clienteBuscado = ObtenerUsuarioPorId(idCliente);
@@ -429,5 +418,49 @@ namespace Dominio
              clienteBuscado.AgregarSaldo(nuevoSaldo); 
                        
         }
+
+        public void CerrarSubasta(int idSubasta, int idAdministrador) //nuevo método
+        {            
+            Subasta subasta = ObternerSubastaPorId(idSubasta); // Buscar la subasta con el ID proporcionado
+            if (subasta == null) throw new Exception("Subasta no encontrada.");
+            if (subasta.Estado != Estado.ABIERTA) throw new Exception("La subasta no está abierta.");
+            if (DateTime.Now < subasta.FechaFinaliz) throw new Exception("La subasta aún no ha llegado a su fecha final.");
+
+            // Obtener el administrador usando el método ObtenerUsuarioPorId()
+            Administrador administrador = ObtenerUsuarioPorId(idAdministrador) as Administrador; // Asegúrate de tener el ID del administrador
+            if (administrador == null) throw new Exception("Administrador no encontrado.");            
+            Oferta ofertaGanadora = subasta.CerrarSubasta(administrador, DateTime.Now);          
+            if (ofertaGanadora != null)
+            {
+                // Procesar el pago o descontar el saldo del ganador
+                Cliente clienteGanador = ofertaGanadora.Clientes as Cliente;
+                if (clienteGanador == null) throw new Exception("No se pudo identificar al cliente ganador.");
+
+                decimal montoGanador = ofertaGanadora.Monto;
+                               
+                if (clienteGanador.SaldoDisponibleBilletera >= montoGanador)
+                {
+                    // Descontar el monto de la billetera del cliente
+                    clienteGanador.SaldoDisponibleBilletera -= montoGanador;
+
+                    // Asignar el artículo ganado al cliente
+                    foreach (Articulo a in subasta.Articulos)
+                    {                     
+                        a.Nombre = clienteGanador;  // Aquí puedes registrar la asignación del artículo al cliente asumiendo que se tiene alguna lógica para registrar la transacción o la venta
+                    }
+                    
+                    RegistrarTransaccion(subasta, clienteGanador, montoGanador); // Si tu sistema tiene una clase de transacciones, puedes registrar la transacción aquí                    
+                    EnviarNotificacionGanador(clienteGanador, subasta);// Opcional: Enviar notificación al ganador                    
+                    Console.WriteLine($"¡Felicidades {clienteGanador.Nombre}! Has ganado la subasta.");// Confirmar que el proceso fue exitoso
+                }
+                else
+                {
+                    throw new Exception("El cliente ganador no tiene suficiente saldo en su billetera.");
+                }
+            }
+
+        }
+
+
     }
 }

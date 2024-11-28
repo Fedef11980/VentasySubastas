@@ -23,6 +23,7 @@
 </form>
 
 <br />
+
 @if (ViewBag.ListadoPublicaciones == null || ViewBag.ListadoPublicaciones.Count == 0)
 {
     <div class="alert alert-danger"><p>Ese tipo de publicación no exite en el sistema</p></div>
@@ -31,8 +32,7 @@ else
 {
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Id</th>
+            <tr>                
                 <th>Nombre</th>
                 <th>Tipo Publicacion</th>
                 <th>Categoría</th>
@@ -43,8 +43,7 @@ else
         <tbody>
             @foreach (Publicacion p in ViewBag.ListadoPublicaciones)
             {               
-                <tr>
-                    <td>@p.Id</td>
+                <tr>                    
                     <td>@p.Nombre</td>
                     <td>@p.TipoDePublicacion()</td> 
                     <td>@p.Estado</td>

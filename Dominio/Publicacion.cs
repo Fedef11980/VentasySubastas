@@ -14,19 +14,22 @@ namespace Dominio
         protected string _nombre;
         protected DateTime _fechaPublic;
         protected DateTime _fechaFinaliz;
+        private Usuario _usuarioFinaliza;        
         protected List<Articulo> _articulos = new List<Articulo>();
         protected Estado _estado;
 
-        public Publicacion (string nombre, DateTime fechaPublic, DateTime fechaFinaliz, Estado estado)
+        public Publicacion (string nombre, DateTime fechaPublic, DateTime fechaFinaliz,Usuario cliente, List<Articulo> articulos, Estado estado)
         {
             _id = s_ultId;
             s_ultId++;
             _nombre = nombre;
             _fechaPublic = fechaPublic;
-            _fechaFinaliz = fechaFinaliz;            
+            _fechaFinaliz = fechaFinaliz;
+            _usuarioFinaliza = cliente;
+            _articulos = articulos;
             _estado = estado;
         }
-
+        //Getters y Setters
         public int Id
         {
             get { return _id; }
@@ -45,12 +48,20 @@ namespace Dominio
         public DateTime FechaFinaliz
         {
             get { return _fechaFinaliz; }
+            set { _fechaFinaliz = value; }
         }
 
-        public string Estado
+        public Usuario UsuarioFinaliza
         {
-            get { return _estado.ToString(); }
-        }       
+            get { return _usuarioFinaliza; }
+            set { _usuarioFinaliza = value; }
+        }
+
+        public Estado Estado 
+        { 
+            get { return _estado; } 
+            set { _estado = value; } 
+        }
 
         public List<Articulo> Articulos
         { 
@@ -90,9 +101,10 @@ namespace Dominio
                 
         public abstract string TipoDePublicacion();
         
-        public abstract double CalcularPrecio();
+        public abstract decimal CalcularPrecio();
 
-      
+        public abstract void FinalizarPublicacion(Publicacion p, Usuario usuarioFinal, DateTime fechaFinalizacion);
+
 
 
     }

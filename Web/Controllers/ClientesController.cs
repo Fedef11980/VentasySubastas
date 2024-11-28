@@ -34,8 +34,9 @@ namespace Web.Controllers
             {
                 if(nuevoSaldo < 0) throw new Exception("El monto no puede ser cero");
                 int? idCliente = HttpContext.Session.GetInt32("id");
+                string? nombreCliente = HttpContext.Session.GetString("nombre");
                 miSistema.CargarSaldoEnBilletera(idCliente.GetValueOrDefault(), nuevoSaldo);
-                ViewBag.Exito = $"Se cambio el saldo de la billetera del cliente {idCliente}";
+                ViewBag.Exito = $"Se cambio el saldo de la billetera de {nombreCliente} y su saldo es de {nuevoSaldo}";
             }
             catch (Exception ex)
             {

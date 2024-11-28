@@ -14,12 +14,20 @@ namespace Web.Controllers
             return View();
         }
 
+        /*[HttpGet]
+        public IActionResult Listado()
+        {
+            ViewBag.Listado = miSistema.Publicaciones;
+            if (TempData["Exito"] != null) ViewBag.Exito = TempData["Exito"];
+            return View();
+        }*/
+
         [HttpGet]
         public IActionResult BuscarPorPublicacion(string publicacion)
         {
             try
             {
-                if (string.IsNullOrEmpty(publicacion)) throw new Exception ("Debe ingresar un tipo de publicacion");
+                if (string.IsNullOrEmpty(publicacion)) throw new Exception ("Debe ingresar un tipo de publicacion correcta o que no esté vacía");
                 ViewBag.ListadoPublicaciones = miSistema.ObtenerPublicacionPorTipo(publicacion); 
             }
             catch (Exception ex)  
@@ -43,7 +51,7 @@ namespace Web.Controllers
         }*/
 
         [HttpPost]
-        public IActionResult OfertaEnSubasta(int id, double monto)
+        public IActionResult OfertaEnSubasta(int id, decimal monto)
         {
             try
             {
@@ -63,6 +71,34 @@ namespace Web.Controllers
         public IActionResult ListarSubastas()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult FinalizarPublicacion(int id)
+        {
+            try
+            {
+                // Obtener la publicación
+                Publicacion publicacionBuscada = Sistema.Instancia.ObtenerPublicacionPorId(id);
+                if (publicacionBuscada == null) throw new Exception("La publicación no existe.");
+                if (publicacionBuscada.Estado != Estado.ABIERTA) throw new Exception("La publicación no está en un estado válido para finalizar.");
+
+                // Simula el usuario actual (puedes obtenerlo desde el sistema de autenticación)
+                Usuario usuarioActual = Sistema.Instancia.ObtenerUsuarioPorId(id);
+
+                // Finalizar la publicación (la lógica depende de la clase Venta o Subasta)
+                publicacionBuscada.FinalizarPublicacion(publicacionBuscada, usuarioActual, DateTime.Now);
+
+                // Mensaje de éxito
+                TempData["Mensaje"] = $"La publicación '{publicacionBuscada.Nombre}' fue finalizada exitosamente.";
+            }
+            catch (Exception ex)
+            {
+                // Mensaje de error
+                TempData["Mensaje"] = $"Error: {ex.Message}";
+            }
+
+            return RedirectToAction("Listado"); // Redirigir a la lista de publicaciones
         }
 
     }
